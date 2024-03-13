@@ -1,0 +1,26 @@
+package star.api.gateway;
+
+import org.apache.dubbo.config.spring.context.annotation.EnableDubbo;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
+import org.springframework.boot.autoconfigure.jdbc.DataSourceTransactionManagerAutoConfiguration;
+import org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfiguration;
+import org.springframework.stereotype.Service;
+
+/**
+ * @author 千树星雨
+ * @date 2024年03月10日
+ */
+
+@SpringBootApplication(exclude = {
+        DataSourceAutoConfiguration.class,
+        DataSourceTransactionManagerAutoConfiguration.class,
+        HibernateJpaAutoConfiguration.class})
+@EnableDubbo
+@Service
+public class StarApiGatewayApplication {
+    public static void main(String[] args) {
+        SpringApplication.run(StarApiGatewayApplication.class, args);
+    }
+}
