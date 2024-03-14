@@ -4,7 +4,17 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5c6732db-a192-445e-99da-5ca0f001d807" name="变更" comment="开放接口平台后端源码" />
+    <list default="true" id="5c6732db-a192-445e-99da-5ca0f001d807" name="变更" comment="开放接口平台后端源码">
+      <change afterPath="$PROJECT_DIR$/star-api-admin/src/main/java/star/api/admin/config/JsonConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/84b3e69b-1dc8-4345-8a23-b36e592ff4f9.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/84b3e69b-1dc8-4345-8a23-b36e592ff4f9.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/star-api-admin/src/main/java/star/api/admin/controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/star-api-admin/src/main/java/star/api/admin/controller/UserController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/star-api-admin/src/main/java/star/api/admin/service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/star-api-admin/src/main/java/star/api/admin/service/UserService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/star-api-admin/src/main/java/star/api/admin/service/impl/UserServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/star-api-admin/src/main/java/star/api/admin/service/impl/UserServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/star-api-common/src/main/java/star/api/common/BaseResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/star-api-common/src/main/java/star/api/common/BaseResponse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/star-api-common/src/main/java/star/api/common/ResultUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/star-api-common/src/main/java/star/api/common/ResultUtils.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -47,7 +57,7 @@
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "WebServerToolWindowFactoryState": "false",
     "jdk.selected.JAVA_MODULE": "1.8",
-    "last_opened_file_path": "D:/Java/_星球项目/api-backend2/star-api-backend",
+    "last_opened_file_path": "D:/Java/_星球项目/api-backend2/star-api-backend/star-api-admin/src/main/java/star/api/admin/config",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -56,9 +66,9 @@
     "project.structure.last.edited": "模块",
     "project.structure.proportion": "0.15625",
     "project.structure.side.proportion": "0.19294989",
-    "settings.editor.selected.configurable": "editing.templates",
+    "settings.editor.selected.configurable": "org.jetbrains.plugins.github.ui.GithubSettingsConfigurable",
     "settings.editor.splitter.proportion": "0.26993865",
-    "spring.configuration.checksum": "55289a4e00a9208d41078bb64b4a9899",
+    "spring.configuration.checksum": "a83af8074be89fb264674cbcc290078f",
     "vue.rearranger.settings.migration": "true"
   },
   "keyToStringList": {
@@ -72,21 +82,38 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\Java\_星球项目\api-backend2\star-api-backend\star-api-admin\src\main\java\star\api\admin\config" />
       <recent name="D:\Java\_星球项目\api-backend2\star-api-backend" />
       <recent name="D:\Java\_星球项目\api-backend2\star-api-backend\sql" />
       <recent name="D:\Java\_星球项目\api-backend2\star-api-backend\star-api-gateway\src\main\java\star\api\gateway" />
       <recent name="D:\Java\_星球项目\api-backend2\star-api-backend\star-api-gateway\src\main" />
-      <recent name="D:\Java\_星球项目\api-backend2\star-api-backend\star-api-gateway\src\main\resources" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="star.api.admin.config" />
       <recent name="star.api.admin.service.impl" />
       <recent name="star.api.admin.controller" />
-      <recent name="star.api.admin.config" />
       <recent name="star.api.admin" />
       <recent name="star.api.constant" />
     </key>
   </component>
-  <component name="RunManager" selected="Spring Boot.StarApiInterfaceApplication">
+  <component name="RunManager" selected="Spring Boot.MyApplication">
+    <configuration name="RedisTest.testRedis" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="star-api-admin" />
+      <shortenClasspath name="MANIFEST" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="star.api.admin.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="star.api.admin" />
+      <option name="MAIN_CLASS_NAME" value="star.api.admin.RedisTest" />
+      <option name="METHOD_NAME" value="testRedis" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration default="true" type="JUnit" factoryName="JUnit">
       <shortenClasspath name="MANIFEST" />
       <option name="TEST_OBJECT" value="class" />
@@ -130,6 +157,7 @@
     <recent_temporary>
       <list>
         <item itemvalue="Spring Boot.MyApplication" />
+        <item itemvalue="JUnit.RedisTest.testRedis" />
         <item itemvalue="Spring Boot.StarApiGatewayApplication" />
       </list>
     </recent_temporary>
@@ -146,7 +174,8 @@
       <workItem from="1710046221731" duration="3605000" />
       <workItem from="1710054501977" duration="72947000" />
       <workItem from="1710252402786" duration="10693000" />
-      <workItem from="1710306934641" duration="24359000" />
+      <workItem from="1710306934641" duration="24722000" />
+      <workItem from="1710349309282" duration="25877000" />
     </task>
     <task id="LOCAL-00001" summary="开放接口平台后端源码">
       <created>1710346677211</created>
@@ -155,7 +184,14 @@
       <option name="project" value="LOCAL" />
       <updated>1710346677211</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="开放接口平台后端源码">
+      <created>1710348932193</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1710348932193</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -228,6 +264,21 @@
           <url>file://$PROJECT_DIR$/star-api-gateway/src/main/java/star/api/gateway/filter/CustomGlobalFilter.java</url>
           <line>192</line>
           <option name="timeStamp" value="57" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/star-api-admin/src/main/java/star/api/admin/interceptor/TokenRefreshInterceptor.java</url>
+          <line>33</line>
+          <option name="timeStamp" value="74" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/star-api-admin/src/main/java/star/api/admin/controller/UserController.java</url>
+          <line>70</line>
+          <option name="timeStamp" value="76" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/star-api-admin/src/main/java/star/api/admin/service/impl/UserServiceImpl.java</url>
+          <line>279</line>
+          <option name="timeStamp" value="78" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

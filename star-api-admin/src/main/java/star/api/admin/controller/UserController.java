@@ -19,6 +19,7 @@ import star.api.model.vo.UserVO;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
+import java.util.UUID;
 
 /**
  * 用户接口
@@ -66,15 +67,8 @@ public class UserController {
      */
     @PostMapping("/login")
     public BaseResponse<UserVO> userLogin(@RequestBody UserLoginRequest userLoginRequest, HttpServletRequest request) {
-        if (userLoginRequest == null) {
-            throw new BusinessException(ErrorCode.PARAMS_ERROR);
-        }
-        String userAccount = userLoginRequest.getUserAccount();
-        String userPassword = userLoginRequest.getUserPassword();
-        if (StringUtils.isAnyBlank(userAccount, userPassword)) {
-            throw new BusinessException(ErrorCode.PARAMS_ERROR);
-        }
-        return ResultUtils.success(userService.userLogin(userAccount, userPassword, request));
+        String token = (String) request.getAttribute("token");
+        return ResultUtils.successToken(userService.userLogin(userLoginRequest,token, request),token);
     }
 
     /**

@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.IService;
 import star.api.common.DeleteRequest;
 import star.api.model.dto.user.UserAddRequest;
+import star.api.model.dto.user.UserLoginRequest;
 import star.api.model.dto.user.UserQueryRequest;
 import star.api.model.dto.user.UserUpdateRequest;
 import star.api.model.entity.User;
@@ -107,12 +108,10 @@ public interface UserService extends IService<User> {
     /**
      * 用户登录
      *
-     * @param userAccount  用户账户
-     * @param userPassword 用户密码
      * @param request
      * @return 脱敏后的用户信息
      */
-    UserVO userLogin(String userAccount, String userPassword, HttpServletRequest request);
+    UserVO userLogin(UserLoginRequest userLoginRequest,String token, HttpServletRequest request);
 
     /**
      * 获取当前登录用户

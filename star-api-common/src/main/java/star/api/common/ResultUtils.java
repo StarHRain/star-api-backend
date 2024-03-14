@@ -16,6 +16,16 @@ public class ResultUtils {
     }
 
     /**
+     * 成功（携带token
+     * @param data
+     * @param <T>
+     * @return
+     */
+    public static <T> BaseResponse<T> successToken(T data,String token) {
+        return new BaseResponse<>(0, data, token);
+    }
+
+    /**
      * 失败
      *
      * @param errorCode

@@ -1,5 +1,6 @@
 package star.api.admin.service.impl;
 
+import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.util.RandomUtil;
 import cn.hutool.crypto.digest.DigestUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
@@ -11,6 +12,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.redisson.api.RedissonClient;
 import org.springframework.beans.BeanUtils;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.util.DigestUtils;
 import star.api.admin.exception.BusinessException;
@@ -19,6 +21,7 @@ import star.api.admin.service.UserService;
 import star.api.common.DeleteRequest;
 import star.api.common.ErrorCode;
 import star.api.model.dto.user.UserAddRequest;
+import star.api.model.dto.user.UserLoginRequest;
 import star.api.model.dto.user.UserQueryRequest;
 import star.api.model.dto.user.UserUpdateRequest;
 import star.api.model.entity.User;
@@ -29,8 +32,12 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
+import static star.api.admin.constant.RedisConstant.LOGIN_TOKEN_KEY;
+import static star.api.admin.constant.RedisConstant.LOGIN_TOKEN_TTL;
 import static star.api.constant.UserConstant.USER_LOGIN_STATE;
 
 
@@ -47,12 +54,17 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User>
     @Resource
     private UserMapper userMapper;
 
+    @Resource
+    private RedissonClient redissonClient;
+
+    @Resource
+    private RedisTemplate<String, Object> redisTemplate;
+
 
     /**
      * 盐值，混淆密码
      */
     private static final String SALT = "Star";
-
 
 
     @Override
@@ -257,17 +269,30 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User>
     /**
      * 用户登录
      *
-     * @param userAccount  用户账户
-     * @param userPassword 用户密码
      * @param request
      * @return
      */
     @Override
-    public UserVO userLogin(String userAccount, String userPassword, HttpServletRequest request) {
-        // 1. 校验
-        if (StringUtils.isAnyBlank(userAccount, userPassword)) {
-            throw new BusinessException(ErrorCode.PARAMS_ERROR, "参数为空");
+    public UserVO userLogin(UserLoginRequest userLoginRequest, String token, HttpServletRequest request) {
+        //Redis缓存解决Session共享问题
+        String headerTokenKey = LOGIN_TOKEN_KEY + request.getHeader("Authorization");
+        Map<Object, Object> cacheUserMap = redisTemplate.opsForHash().entries(headerTokenKey);
+        if (!cacheUserMap.isEmpty()) {
+            User user = BeanUtil.fillBeanWithMap(cacheUserMap, new User(), false);
+            request.getSession().setAttribute(USER_LOGIN_STATE, user);
+            return this.getUserVO(user);
         }
+
+        // 1. 校验
+        if (userLoginRequest == null) {
+            throw new BusinessException(ErrorCode.PARAMS_ERROR);
+        }
+        String userAccount = userLoginRequest.getUserAccount();
+        String userPassword = userLoginRequest.getUserPassword();
+        if (StringUtils.isAnyBlank(userAccount, userPassword)) {
+            throw new BusinessException(ErrorCode.PARAMS_ERROR);
+        }
+
         if (userAccount.length() < 4) {
             throw new BusinessException(ErrorCode.PARAMS_ERROR, "账号错误");
         }
@@ -286,6 +311,12 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User>
             log.info("user login failed, userAccount cannot match userPassword");
             throw new BusinessException(ErrorCode.PARAMS_ERROR, "用户不存在或密码错误");
         }
+
+        Map<String, Object> userMap = BeanUtil.beanToMap(user);
+        String tokenKey = LOGIN_TOKEN_KEY + token;
+        redisTemplate.opsForHash().putAll(tokenKey, userMap);
+        redisTemplate.expire(tokenKey, LOGIN_TOKEN_TTL, TimeUnit.MINUTES);
+
         // 3. 记录用户的登录态
         request.getSession().setAttribute(USER_LOGIN_STATE, user);
         return this.getUserVO(user);
