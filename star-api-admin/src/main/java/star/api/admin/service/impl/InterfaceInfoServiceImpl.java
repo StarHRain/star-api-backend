@@ -1,17 +1,21 @@
 package star.api.admin.service.impl;
 
+import cn.hutool.core.lang.TypeReference;
 import cn.hutool.json.JSONUtil;
-import co.elastic.clients.ApiClient;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.CollectionUtils;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.redisson.api.RLock;
+import org.redisson.api.RedissonClient;
 import org.springframework.beans.BeanUtils;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.transaction.annotation.Transactional;
 import star.api.admin.config.GatewayConfig;
+import star.api.admin.config.ThreadPoolConfig;
 import star.api.admin.exception.BusinessException;
 import star.api.admin.exception.ThrowUtils;
 import star.api.admin.factory.ApiClientFactory;
@@ -23,6 +27,7 @@ import star.api.admin.utils.SqlUtils;
 import star.api.common.DeleteRequest;
 import star.api.common.ErrorCode;
 import star.api.common.IdRequest;
+import star.api.common.RedisData;
 import star.api.model.dto.interfaceinfo.InterfaceInfoAddRequest;
 import star.api.model.dto.interfaceinfo.InterfaceInfoInvokeRequest;
 import star.api.model.dto.interfaceinfo.InterfaceInfoQueryRequest;
@@ -30,7 +35,6 @@ import star.api.model.dto.interfaceinfo.InterfaceInfoUpdateRequest;
 import star.api.model.entity.InterfaceInfo;
 import star.api.model.entity.User;
 import star.api.model.entity.UserInterfaceInfo;
-import star.api.model.enums.InterfaceInfoStatusEnum;
 import star.api.model.vo.InterfaceInfoVO;
 import star.api.model.vo.RequestParamsRemarkVO;
 import star.api.model.vo.ResponseParamsRemarkVO;
@@ -39,10 +43,14 @@ import star.api.sdk.client.StarApiClient;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
-import java.io.UnsupportedEncodingException;
+import java.time.LocalDateTime;
 import java.util.*;
+import java.util.concurrent.Future;
+import java.util.concurrent.ThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
+import static star.api.admin.constant.RedisConstant.*;
 import static star.api.constant.CommonConstant.SORT_ORDER_ASC;
 import static star.api.constant.CommonConstant.SORT_ORDER_DESC;
 import static star.api.model.enums.InterfaceInfoStatusEnum.OFFLINE;
@@ -64,7 +72,18 @@ public class InterfaceInfoServiceImpl extends ServiceImpl<InterfaceInfoMapper, I
     private UserInterfaceInfoService userInterfaceInfoService;
 
     @Resource
+    private RedisTemplate redisTemplate;
+
+    @Resource
+    private RedissonClient redissonClient;
+
+    @Resource
+    private ThreadPoolExecutor threadPoolExecutor;
+
+    @Resource
     private GatewayConfig gatewayConfig;
+
+    private volatile boolean isCacheRebuilding = false;
 
     /**
      * 添加接口
@@ -218,16 +237,105 @@ public class InterfaceInfoServiceImpl extends ServiceImpl<InterfaceInfoMapper, I
         if (interfaceInfoQueryRequest == null) {
             return null;
         }
+        //查询是否有缓存数据
+        long current = interfaceInfoQueryRequest.getCurrent();
+        String cacheKey = INTERFACE_QUERY_KEY + current;
+        String cache = (String) redisTemplate.opsForValue().get(cacheKey);
+        //为空 代表没有访问过数据库（访问过数据库没有数据会缓存 “” 空值
+        //获取互斥锁
+        String lockKey = LOCK_INTERFACE_PAGE + current;
+        RLock lock = redissonClient.getLock(lockKey);
+        if (cache == null) {
+            if (lock.tryLock()) {
+                try {
+                    //双重检测
+                    cache = (String) redisTemplate.opsForValue().get(cacheKey);
+                    if (cache == null) {
+                        //缓存数据
+                        Page<InterfaceInfo> interfaceInfoPage = this.cacheInterfaceInfo(interfaceInfoQueryRequest, INTERFACE_QUERY_TTL);
+                        return interfaceInfoPage;
+                    }
+                } catch (Exception e) {
+                    throw new BusinessException(ErrorCode.OPERATION_ERROR, "缓存失败");
+                } finally {
+                    if (lock.isHeldByCurrentThread()) {
+                        lock.unlock();
+                    }
+                }
+            }
+            return null;
+        }
+        //数据库有数据且已缓存
+        RedisData<Page<InterfaceInfo>> redisData = JSONUtil.toBean(cache, new TypeReference<RedisData<Page<InterfaceInfo>>>() {
+        }, false);
+        Page<InterfaceInfo> interfaceInfoPage = redisData.getData();
+        LocalDateTime expireTime = redisData.getExpireTime();
+        //缓存数据未过期，返回
+        if (expireTime.isAfter(LocalDateTime.now())) {
+            return interfaceInfoPage;
+        }
+        //缓存过期，缓存重建
+        // 1. 上锁
+        if (lock.tryLock()) {
+            try {
+                //设立标志位，缓存过期且没有其他线程正在重建缓存
+                // 则重建缓存（防止因异步执行（缓存重建前锁被提前释放）导致的多次重建
+                if (!isCacheRebuilding) {
+                    //双重检测（防止重建后锁一释放缓存被多次重建
+                    cache = (String) redisTemplate.opsForValue().get(cacheKey);
+                    redisData = JSONUtil.toBean(cache, new TypeReference<RedisData<Page<InterfaceInfo>>>() {
+                    }, false);
+                    expireTime = redisData.getExpireTime();
+                    if (expireTime.isAfter(LocalDateTime.now())) {
+                        return redisData.getData();
+                    }
+                    // 异步执行，重建缓存
+                    isCacheRebuilding = true;
+                    threadPoolExecutor.execute(() -> {
+                        this.cacheInterfaceInfo(interfaceInfoQueryRequest, INTERFACE_QUERY_TTL);
+                        isCacheRebuilding = false; // 缓存重建完成，清除标志位
+                    });
+                }
+            } finally {
+                if (lock.isHeldByCurrentThread()) {
+                    lock.unlock();
+                }
+            }
+
+        }
+        // 2. 返回旧数据
+        return interfaceInfoPage;
+
+    }
+
+    @Transactional
+    public Page<InterfaceInfo> cacheInterfaceInfo(InterfaceInfoQueryRequest interfaceInfoQueryRequest, Long expireSeconds) {
+        //查询数据
         long current = interfaceInfoQueryRequest.getCurrent();
         long size = interfaceInfoQueryRequest.getPageSize();
         interfaceInfoQueryRequest.setSortField("createTime");
         interfaceInfoQueryRequest.setSortOrder(SORT_ORDER_DESC);
 
-        // 限制爬虫
-        ThrowUtils.throwIf(size > 20, ErrorCode.PARAMS_ERROR);
-
         Page<InterfaceInfo> interfaceInfoPage = this.page(new Page<>(current, size), this.getQueryWrapper(interfaceInfoQueryRequest));
+
+        try {
+            Thread.sleep(200);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+        //如果数据库无该数据 缓存空值 防止缓存穿透
+        RedisData<Page<InterfaceInfo>> redisData=null;
+        if (interfaceInfoPage == null) {
+            //数据库没有数据缓存空值
+            redisData = new RedisData<>(null, LocalDateTime.now().plusSeconds(1L));
+        } else {
+            //缓存数据,采用逻辑过期的方式，Key主键为页数
+            redisData = new RedisData<>(interfaceInfoPage, LocalDateTime.now().plusSeconds(1L));
+        }
+        redisTemplate.opsForValue().set(INTERFACE_QUERY_KEY + current, JSONUtil.toJsonStr(redisData));
+
         return interfaceInfoPage;
+
     }
 
     /**
@@ -324,7 +432,7 @@ public class InterfaceInfoServiceImpl extends ServiceImpl<InterfaceInfoMapper, I
      */
     @Override
     public Boolean offlineInterfaceInfo(IdRequest idRequest) {
-        ThrowUtils.throwIf(idRequest == null || idRequest.getId() <= 0,ErrorCode.PARAMS_ERROR);
+        ThrowUtils.throwIf(idRequest == null || idRequest.getId() <= 0, ErrorCode.PARAMS_ERROR);
 
         //判断接口是否存在
         InterfaceInfo oldInterfaceInfo = this.getById(idRequest.getId());

@@ -98,6 +98,11 @@ public class InterfaceInfoController {
         return ResultUtils.success(interfaceInfoService.listInterfaceInfoVOByPage(interfaceInfoPage, request));
     }
 
+    @PostMapping("/list/page")
+    public BaseResponse<Page<InterfaceInfo>> listInterfaceInfo(InterfaceInfoQueryRequest interfaceInfoQueryRequest, HttpServletRequest request) {
+        return ResultUtils.success(interfaceInfoService.listInterfaceInfoByPage(interfaceInfoQueryRequest, request));
+    }
+
     /**
      * 获取当前用户接口列表（分页，VO
      *
