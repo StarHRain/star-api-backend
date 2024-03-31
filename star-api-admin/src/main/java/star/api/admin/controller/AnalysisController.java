@@ -25,13 +25,13 @@ import static star.api.constant.UserConstant.ADMIN_ROLE;
 public class AnalysisController {
 
     @Resource
-    private AnalysisServiceImpl analysisService;
+    private AnalysisServiceImpl analysisServiceImpl;
 
     private static final int TOP_LIMIT = 3;
 
     @GetMapping("/top/interface/invoke")
     @AuthCheck(mustRole = ADMIN_ROLE)
     public BaseResponse<List<InterfaceInfoVO>> listTopInvokeInterfaceInfo() {
-        return ResultUtils.success(analysisService.listTopInvokeInterfaceInfo(TOP_LIMIT));
+        return ResultUtils.success(analysisServiceImpl.listTopInvokeInterfaceInfo(TOP_LIMIT));
     }
 }

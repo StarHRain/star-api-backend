@@ -54,12 +54,6 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User>
     @Resource
     private UserMapper userMapper;
 
-    @Resource
-    private RedissonClient redissonClient;
-
-    @Resource
-    private RedisTemplate<String, Object> redisTemplate;
-
 
     /**
      * 盐值，混淆密码
@@ -274,15 +268,6 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User>
      */
     @Override
     public UserVO userLogin(UserLoginRequest userLoginRequest, String token, HttpServletRequest request) {
-        //Redis缓存解决Session共享问题
-        String headerTokenKey = LOGIN_TOKEN_KEY + request.getHeader("Authorization");
-        Map<Object, Object> cacheUserMap = redisTemplate.opsForHash().entries(headerTokenKey);
-        if (!cacheUserMap.isEmpty()) {
-            User user = BeanUtil.fillBeanWithMap(cacheUserMap, new User(), false);
-            request.getSession().setAttribute(USER_LOGIN_STATE, user);
-            return this.getUserVO(user);
-        }
-
         // 1. 校验
         if (userLoginRequest == null) {
             throw new BusinessException(ErrorCode.PARAMS_ERROR);
@@ -299,8 +284,28 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User>
         if (userPassword.length() < 8) {
             throw new BusinessException(ErrorCode.PARAMS_ERROR, "密码错误");
         }
+
+//        //Redis缓存解决Session共享问题
+//        String headerTokenKey = LOGIN_TOKEN_KEY + request.getHeader("Authorization");
+//        Map<Object, Object> cacheUserMap = redisTemplate.opsForHash().entries(headerTokenKey);
+//        if (!cacheUserMap.isEmpty()) {
+//            User user = BeanUtil.fillBeanWithMap(cacheUserMap, new User(), false);
+//            if (user.getUserAccount().equals(userAccount)&&user.getUserPassword().equals(userPassword)) {
+//                request.getSession().setAttribute(USER_LOGIN_STATE, user);
+//                return this.getUserVO(user);
+//            }
+//        }
+
         // 2. 加密
         String encryptPassword = DigestUtils.md5DigestAsHex((SALT + userPassword).getBytes());
+        //查询是否缓存session
+        User userSession =(User) request.getSession().getAttribute(USER_LOGIN_STATE);
+        if (userSession!=null){
+            //登录账户相同则放回缓存用户
+            if (userAccount.equals(userSession.getUserAccount())&&encryptPassword.equals(userSession.getUserPassword())) {
+                return this.getUserVO(userSession);
+            }
+        }
         // 查询用户是否存在
         QueryWrapper<User> queryWrapper = new QueryWrapper<>();
         queryWrapper.eq("userAccount", userAccount);
@@ -312,10 +317,10 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User>
             throw new BusinessException(ErrorCode.PARAMS_ERROR, "用户不存在或密码错误");
         }
 
-        Map<String, Object> userMap = BeanUtil.beanToMap(user);
-        String tokenKey = LOGIN_TOKEN_KEY + token;
-        redisTemplate.opsForHash().putAll(tokenKey, userMap);
-        redisTemplate.expire(tokenKey, LOGIN_TOKEN_TTL, TimeUnit.MINUTES);
+//        Map<String, Object> userMap = BeanUtil.beanToMap(user);
+//        String tokenKey = LOGIN_TOKEN_KEY + token;
+//        redisTemplate.opsForHash().putAll(tokenKey, userMap);
+//        redisTemplate.expire(tokenKey, LOGIN_TOKEN_TTL, TimeUnit.MINUTES);
 
         // 3. 记录用户的登录态
         request.getSession().setAttribute(USER_LOGIN_STATE, user);
@@ -374,7 +379,10 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User>
         if (request.getSession().getAttribute(USER_LOGIN_STATE) == null) {
             throw new BusinessException(ErrorCode.OPERATION_ERROR, "未登录");
         }
-        // 移除登录态
+//        // 移除登录态
+//        String headerTokenKey = LOGIN_TOKEN_KEY + request.getHeader("Authorization");
+//        // 删除 Redis 缓存中的键
+//        redisTemplate.delete(headerTokenKey);
         request.getSession().removeAttribute(USER_LOGIN_STATE);
         return true;
     }

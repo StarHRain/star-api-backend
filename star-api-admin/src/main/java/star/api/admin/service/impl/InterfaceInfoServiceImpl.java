@@ -229,20 +229,19 @@ public class InterfaceInfoServiceImpl extends ServiceImpl<InterfaceInfoMapper, I
      * 获取接口列表（分页
      *
      * @param interfaceInfoQueryRequest
-     * @param request
      * @return
      */
     @Override
-    public Page<InterfaceInfo> listInterfaceInfoByPage(InterfaceInfoQueryRequest interfaceInfoQueryRequest, HttpServletRequest request) {
+    public Page<InterfaceInfo> listInterfaceInfoByPage(InterfaceInfoQueryRequest interfaceInfoQueryRequest) {
         if (interfaceInfoQueryRequest == null) {
             return null;
         }
-        //查询是否有缓存数据
+        // 查询是否有缓存数据
         long current = interfaceInfoQueryRequest.getCurrent();
         String cacheKey = INTERFACE_QUERY_KEY + current;
         String cache = (String) redisTemplate.opsForValue().get(cacheKey);
-        //为空 代表没有访问过数据库（访问过数据库没有数据会缓存 “” 空值
-        //获取互斥锁
+        // 为空 代表没有访问过数据库（访问过数据库没有数据会缓存空值
+        // 获取互斥锁
         String lockKey = LOCK_INTERFACE_PAGE + current;
         RLock lock = redissonClient.getLock(lockKey);
         if (cache == null) {
@@ -265,7 +264,7 @@ public class InterfaceInfoServiceImpl extends ServiceImpl<InterfaceInfoMapper, I
             }
             return null;
         }
-        //数据库有数据且已缓存
+        // 有缓存数据（可能为空值
         RedisData<Page<InterfaceInfo>> redisData = JSONUtil.toBean(cache, new TypeReference<RedisData<Page<InterfaceInfo>>>() {
         }, false);
         Page<InterfaceInfo> interfaceInfoPage = redisData.getData();
@@ -274,7 +273,7 @@ public class InterfaceInfoServiceImpl extends ServiceImpl<InterfaceInfoMapper, I
         if (expireTime.isAfter(LocalDateTime.now())) {
             return interfaceInfoPage;
         }
-        //缓存过期，缓存重建
+        // 缓存过期，缓存重建
         // 1. 上锁
         if (lock.tryLock()) {
             try {
@@ -358,7 +357,9 @@ public class InterfaceInfoServiceImpl extends ServiceImpl<InterfaceInfoMapper, I
         Set<Long> userIdSet = interfaceInfoList.stream()
                 .map(InterfaceInfo::getUserId)
                 .collect(Collectors.toSet());
-        Map<Long, List<User>> userIdUserListMap = userService.listByIds(userIdSet).stream()
+        Map<Long, List<User>> userIdUserListMap = userService
+                .listByIds(userIdSet)
+                .stream()
                 .collect(Collectors.groupingBy(User::getId));
 
         //获取当前登录用户
@@ -462,7 +463,7 @@ public class InterfaceInfoServiceImpl extends ServiceImpl<InterfaceInfoMapper, I
         InterfaceInfo interfaceInfo = this.getById(interfaceInfoInvokeRequest.getId());
         ThrowUtils.throwIf(interfaceInfo == null, ErrorCode.NOT_FOUND_ERROR);
         //接口状态是否开放
-        ThrowUtils.throwIf(!interfaceInfo.getStatus().equals(ONLINE.getValue()), ErrorCode.OPERATION_ERROR);
+        ThrowUtils.throwIf(!interfaceInfo.getStatus().equals(OFFLINE.getValue()), ErrorCode.OPERATION_ERROR);
 
         //获取SDK客户端
         StarApiClient appClient = new ApiClientFactory().getApiClient(userService.getLoginUser(request));
@@ -557,7 +558,7 @@ public class InterfaceInfoServiceImpl extends ServiceImpl<InterfaceInfoMapper, I
     //    todo：根据用户id查询UserInfo里的接口 返回该用户只开通的接口
     @Override
     public Page<InterfaceInfoVO> listInterfaceInfoVOByCurrentId(InterfaceInfoQueryRequest interfaceInfoQueryRequest, HttpServletRequest request) {
-        Page<InterfaceInfo> interfaceInfoPage = this.listInterfaceInfoByPage(interfaceInfoQueryRequest, request);
+        Page<InterfaceInfo> interfaceInfoPage = this.listInterfaceInfoByPage(interfaceInfoQueryRequest);
         return this.listInterfaceInfoVOByPage(interfaceInfoPage, request);
     }
 

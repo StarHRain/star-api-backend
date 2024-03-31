@@ -1,4 +1,4 @@
-package cn.ichensw.neroapiadmin.config;
+package star.api.admin.config;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.module.SimpleModule;

@@ -76,10 +76,9 @@ public interface InterfaceInfoService extends IService<InterfaceInfo> {
      * 分页获取列表
      *
      * @param interfaceInfoQueryRequest
-     * @param request
      * @return
      */
-    Page<InterfaceInfo> listInterfaceInfoByPage(InterfaceInfoQueryRequest interfaceInfoQueryRequest, HttpServletRequest request);
+    Page<InterfaceInfo> listInterfaceInfoByPage(InterfaceInfoQueryRequest interfaceInfoQueryRequest);
 
     /**
      * 获取接口（分页，VO

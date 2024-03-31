@@ -9,6 +9,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import javax.annotation.PostConstruct;
+import javax.validation.constraints.NotNull;
 import java.util.concurrent.*;
 
 import static star.api.admin.constant.ThreadPoolContanst.*;
@@ -19,7 +20,16 @@ import static star.api.admin.constant.ThreadPoolContanst.*;
 @Configuration
 public class ThreadPoolConfig {
     @Bean
-    public ThreadPoolExecutor createExecutorService(){
+    public ThreadPoolExecutor threadPoolExecutor(){
+        ThreadFactory threadFactory = new ThreadFactory(){
+            private int count = 1;
+            @Override
+            public Thread newThread(@NotNull Runnable r) {
+                Thread thread = new Thread(r);
+                thread.setName("线程" + count++);
+                return thread;
+            }
+        };
         //创建一个有界阻塞队列
         BlockingQueue<Runnable> queue = new ArrayBlockingQueue<>(QUEUE_CAPACITY);
 
@@ -30,7 +40,7 @@ public class ThreadPoolConfig {
                 KEEP_ALIVE_TIME,
                 TimeUnit.SECONDS,
                 queue,
-                Executors.defaultThreadFactory(),
+                threadFactory,
                 new ThreadPoolExecutor.CallerRunsPolicy());
 
         return executor;

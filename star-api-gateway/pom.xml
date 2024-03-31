@@ -19,7 +19,7 @@
         <dependency>
             <groupId>star.api</groupId>
             <artifactId>star-api-sdk</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
+            <version>0.0.1</version>
         </dependency>
         <!--StarApi common-->
         <dependency>
