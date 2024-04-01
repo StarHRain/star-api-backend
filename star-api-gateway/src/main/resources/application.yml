@@ -11,7 +11,7 @@ spring:
         - id: api_route
           uri: http://localhost:8123
           predicates:
-            - Path=/api/**
+            - Path=/**
   redis:
     host: localhost
     port: 6379

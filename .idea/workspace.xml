@@ -4,31 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5c6732db-a192-445e-99da-5ca0f001d807" name="变更" comment="3.31 加入了BI项目整合">
-      <change afterPath="$PROJECT_DIR$/.idea/dataSources/84b3e69b-1dc8-4345-8a23-b36e592ff4f9/storage_v2/_src_/schema/db2019.ZBIhsA.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/dataSources/84b3e69b-1dc8-4345-8a23-b36e592ff4f9/storage_v2/_src_/schema/db_library.-nlaxQ.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/dataSources/84b3e69b-1dc8-4345-8a23-b36e592ff4f9/storage_v2/_src_/schema/mybatis.03UUWg.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/dataSources/84b3e69b-1dc8-4345-8a23-b36e592ff4f9/storage_v2/_src_/schema/mybatis_plus.hnzq5g.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/dataSources/84b3e69b-1dc8-4345-8a23-b36e592ff4f9/storage_v2/_src_/schema/nacos_config.7VLmdQ.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/dataSources/84b3e69b-1dc8-4345-8a23-b36e592ff4f9/storage_v2/_src_/schema/newbee.4u57wQ.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/dataSources/84b3e69b-1dc8-4345-8a23-b36e592ff4f9/storage_v2/_src_/schema/project_crowd.B9Asxw.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/dataSources/84b3e69b-1dc8-4345-8a23-b36e592ff4f9/storage_v2/_src_/schema/world.khvBBg.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/dataSources/84b3e69b-1dc8-4345-8a23-b36e592ff4f9/storage_v2/_src_/schema/yuapi.fsXfBg.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/dataSources/c17ce3ae-1383-4d1b-b8a7-f5108f67311d.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/dataSources/c17ce3ae-1383-4d1b-b8a7-f5108f67311d/storage_v2/_src_/schema/information_schema.FNRwLQ.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/star-api-admin/src/main/java/star/api/admin/utils/ExcelUtils.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/star-api-gateway/src/main/resources/application-prod.yml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/star-api-interface/src/main/resources/application-prod.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/84b3e69b-1dc8-4345-8a23-b36e592ff4f9.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/84b3e69b-1dc8-4345-8a23-b36e592ff4f9.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="5c6732db-a192-445e-99da-5ca0f001d807" name="变更" comment="4.1 完善">
+      <change afterPath="$PROJECT_DIR$/star-api-interface/src/main/java/star/api/apiinterface/config/MyWebConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/star-api-interface/src/main/java/star/api/apiinterface/controller/InterestingController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/star-api-interface/src/main/java/star/api/apiinterface/controller/NetEaseController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/star-api-admin/src/main/java/star/api/admin/service/impl/ChartServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/star-api-admin/src/main/java/star/api/admin/service/impl/ChartServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/star-api-admin/src/main/java/star/api/admin/service/impl/InterfaceInfoServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/star-api-admin/src/main/java/star/api/admin/service/impl/InterfaceInfoServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/star-api-admin/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/star-api-admin/src/main/resources/application.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/star-api-gateway/src/main/java/star/api/gateway/config/RedissonConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/star-api-gateway/src/main/java/star/api/gateway/config/RedissonConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/star-api-gateway/src/main/java/star/api/gateway/filter/CustomGlobalFilter.java" beforeDir="false" afterPath="$PROJECT_DIR$/star-api-gateway/src/main/java/star/api/gateway/filter/CustomGlobalFilter.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/star-api-gateway/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/star-api-gateway/src/main/resources/application.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/star-api-sdk/src/main/java/star/api/sdk/client/StarApiClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/star-api-sdk/src/main/java/star/api/sdk/client/StarApiClient.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -125,14 +106,14 @@
       <recent name="D:\Java\_星球项目\api-backend2\star-api-backend\star-bi-admin\src\main\java\star\api\admin\service" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="star.api.apiinterface.controller" />
       <recent name="star.api.admin.manager" />
       <recent name="star.api.admin.controller" />
       <recent name="star.api.admin.service" />
       <recent name="star.api.admin" />
-      <recent name="star.api.admin.utils" />
     </key>
   </component>
-  <component name="RunManager" selected="Spring Boot.StarApiInterfaceApplication">
+  <component name="RunManager" selected="Spring Boot.StarApiGatewayApplication">
     <configuration default="true" type="JUnit" factoryName="JUnit">
       <shortenClasspath name="MANIFEST" />
       <option name="TEST_OBJECT" value="class" />
@@ -221,7 +202,7 @@
       <workItem from="1711944226401" duration="2344000" />
       <workItem from="1711963397288" duration="1276000" />
       <workItem from="1711964688050" duration="244000" />
-      <workItem from="1711965060753" duration="1760000" />
+      <workItem from="1711965060753" duration="6407000" />
     </task>
     <task id="LOCAL-00001" summary="开放接口平台后端源码">
       <created>1710346677211</created>
@@ -272,7 +253,14 @@
       <option name="project" value="LOCAL" />
       <updated>1711877254334</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="4.1 完善">
+      <created>1711966925283</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1711966925283</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -294,7 +282,65 @@
     <MESSAGE value="3.14 利用Redis缓存解决了分布式Session共享问题 控制器拦截所有方法刷新缓存时间" />
     <MESSAGE value="3.16 解决了大量线程请求获取接口页时导致的缓存穿透（数据库没数据缓存空置）和缓存击穿（运用互斥锁和逻辑过期）问题，构建线程池，异步执行缓存重建" />
     <MESSAGE value="3.31 加入了BI项目整合" />
-    <option name="LAST_COMMIT_MESSAGE" value="3.31 加入了BI项目整合" />
+    <MESSAGE value="4.1 完善" />
+    <option name="LAST_COMMIT_MESSAGE" value="4.1 完善" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/star-api-interface/src/main/java/star/api/apiinterface/controller/InterestingController.java</url>
+          <line>20</line>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/star-api-sdk/src/main/java/star/api/sdk/client/StarApiClient.java</url>
+          <line>53</line>
+          <option name="timeStamp" value="10" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/star-api-interface/src/main/java/star/api/apiinterface/controller/InterestingController.java</url>
+          <line>38</line>
+          <option name="timeStamp" value="12" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/star-api-gateway/src/main/java/star/api/gateway/filter/CustomGlobalFilter.java</url>
+          <line>99</line>
+          <option name="timeStamp" value="15" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/star-api-gateway/src/main/java/star/api/gateway/filter/CustomGlobalFilter.java</url>
+          <line>155</line>
+          <option name="timeStamp" value="16" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/star-api-interface/src/main/java/star/api/apiinterface/controller/InterestingController.java</url>
+          <line>29</line>
+          <option name="timeStamp" value="17" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/star-api-interface/src/main/java/star/api/apiinterface/controller/InterestingController.java</url>
+          <line>48</line>
+          <option name="timeStamp" value="18" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/star-api-interface/src/main/java/star/api/apiinterface/controller/NetEaseController.java</url>
+          <line>20</line>
+          <option name="timeStamp" value="19" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/star-api-interface/src/main/java/star/api/apiinterface/controller/NetEaseController.java</url>
+          <line>31</line>
+          <option name="timeStamp" value="20" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+    <pin-to-top-manager>
+      <pinned-members>
+        <PinnedItemInfo parentTag="cn.hutool.http.HttpConnection" memberName="proxy" />
+        <PinnedItemInfo parentTag="cn.hutool.http.HttpConnection" memberName="conn" />
+      </pinned-members>
+    </pin-to-top-manager>
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
