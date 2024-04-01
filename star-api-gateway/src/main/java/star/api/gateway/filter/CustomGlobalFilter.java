@@ -9,6 +9,7 @@ import org.apache.dubbo.config.annotation.DubboReference;
 import org.reactivestreams.Publisher;
 import org.redisson.api.RLock;
 import org.redisson.api.RedissonClient;
+import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.cloud.gateway.filter.GatewayFilterChain;
 import org.springframework.cloud.gateway.filter.GlobalFilter;
 import org.springframework.core.Ordered;
@@ -75,9 +76,7 @@ public class CustomGlobalFilter implements GlobalFilter, Ordered {
     @Resource
     private RedisTemplate<String, Object> redisTemplate;
 
-    private static final String INTERFACE_HOST = "http://localhost:8123";
-
-    private static final List<String> IP_WHITE_LIST = Arrays.asList("127.0.0.1", "0:0:0:0:0:0:0:1");
+    private static final List<String> IP_WHITE_LIST = Arrays.asList("127.0.0.1", "172.28.59.162");
     private static final String LOCK_GATEWAY_USER = "star:api:gateway:user";
     private static final int LOCK_REGAIN_MAX_TIME_SEC = 5;
     private static final String DYE_DATA_HEADER = "X-Dye-Data";

@@ -415,9 +415,6 @@ public class InterfaceInfoServiceImpl extends ServiceImpl<InterfaceInfoMapper, I
         InterfaceInfo oldInterfaceInfo = this.getById(interfaceInfoInvokeRequest.getId());
         ThrowUtils.throwIf(oldInterfaceInfo == null, ErrorCode.NOT_FOUND_ERROR);
 
-        //判断是否可以调用
-        this.invokeInterfaceInfo(interfaceInfoInvokeRequest, request);
-
         InterfaceInfo interfaceInfo = new InterfaceInfo();
         interfaceInfo.setId(interfaceInfoInvokeRequest.getId());
         interfaceInfo.setStatus(ONLINE.getValue());
@@ -462,8 +459,9 @@ public class InterfaceInfoServiceImpl extends ServiceImpl<InterfaceInfoMapper, I
         //判断接口是否存在
         InterfaceInfo interfaceInfo = this.getById(interfaceInfoInvokeRequest.getId());
         ThrowUtils.throwIf(interfaceInfo == null, ErrorCode.NOT_FOUND_ERROR);
-        //接口状态是否开放
-        ThrowUtils.throwIf(!interfaceInfo.getStatus().equals(OFFLINE.getValue()), ErrorCode.OPERATION_ERROR);
+
+        //接口不是开启状态则抛出异常
+        ThrowUtils.throwIf(!interfaceInfo.getStatus().equals(ONLINE.getValue()), ErrorCode.OPERATION_ERROR);
 
         //获取SDK客户端
         StarApiClient appClient = new ApiClientFactory().getApiClient(userService.getLoginUser(request));

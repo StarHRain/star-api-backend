@@ -23,7 +23,7 @@ import static star.api.sdk.utils.SignUtils.getSign;
  *  API 调用
  */
 public class StarApiClient {
-    public static String GATWAY_HOST="http://localhost:8090";
+    public static String GATWAY_HOST="http://8.136.99.4:8090";
 
     private String accessKey;
 

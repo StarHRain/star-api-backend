@@ -2,21 +2,20 @@ server:
   port: 8090
 
 spring:
-  #默认 dev 环境
-  profiles:
-    active: dev
+  # 网关 配置
   cloud:
     gateway:
       routes:
         - id: api_route
-          uri: http://localhost:8123
+          uri: http://8.136.99.4:8123
           predicates:
             - Path=/api/**
+  # Redis 配置
   redis:
-    host: localhost
+    host: 8.136.99.4
     port: 6379
-    database: 1
-
+    password: Hy123456
+    database: 0
 # Dubbo 配置
 dubbo:
   application:
@@ -26,4 +25,4 @@ dubbo:
     port: -1
   registry:
     id: nacos-registry
-    address: nacos://localhost:8848
+    address: nacos://8.136.99.4:8848

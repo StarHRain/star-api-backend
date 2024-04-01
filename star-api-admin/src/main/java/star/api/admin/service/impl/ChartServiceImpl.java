@@ -23,7 +23,6 @@ import star.api.admin.utils.ExcelUtils;
 import star.api.admin.utils.SqlUtils;
 import star.api.common.DeleteRequest;
 import star.api.common.ErrorCode;
-import star.api.common.ResultUtils;
 import star.api.constant.CommonConstant;
 import star.api.model.dto.chart.*;
 import star.api.model.entity.Chart;
@@ -34,8 +33,6 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.util.Arrays;
 import java.util.List;
-import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.ThreadPoolExecutor;
 
 import static star.api.admin.constant.ChartConstant.STATUS_FAILED;
 import static star.api.admin.constant.ChartConstant.STATUS_SUCCESS;
@@ -273,7 +270,7 @@ public class ChartServiceImpl extends ServiceImpl<ChartMapper, Chart>
         // 校验文件后缀 aaa.png
         String originalFilename = multipartFile.getOriginalFilename();
         String suffix = FileUtil.getSuffix(originalFilename);
-        ThrowUtils.throwIf(com.alibaba.excel.util.StringUtils.isBlank(suffix), ErrorCode.PARAMS_ERROR, "文件名异常");
+        ThrowUtils.throwIf(StringUtils.isBlank(suffix), ErrorCode.PARAMS_ERROR, "文件名异常");
         final List<String> validFileSuffixList = Arrays.asList("xlsx");
         ThrowUtils.throwIf(!validFileSuffixList.contains(suffix), ErrorCode.PARAMS_ERROR, "文件后缀非法");
     }
