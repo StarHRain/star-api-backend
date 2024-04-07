@@ -3,18 +3,17 @@
 //import lombok.extern.slf4j.Slf4j;
 //import org.springframework.data.redis.core.RedisTemplate;
 //import org.springframework.web.servlet.HandlerInterceptor;
-//import star.api.admin.exception.ThrowUtils;
-//import star.api.common.ErrorCode;
+//import org.springframework.web.servlet.ModelAndView;
 //
-//import javax.annotation.Resource;
 //import javax.servlet.http.HttpServletRequest;
 //import javax.servlet.http.HttpServletResponse;
 //import java.util.Map;
 //import java.util.UUID;
 //import java.util.concurrent.TimeUnit;
 //
-//import static star.api.admin.constant.RedisConstant.LOGIN_TOKEN_KEY;
-//import static star.api.admin.constant.RedisConstant.LOGIN_TOKEN_TTL;
+//import static star.api.constant.RedisConstant.LOGIN_TOKEN_KEY;
+//import static star.api.constant.RedisConstant.LOGIN_TOKEN_TTL;
+//
 //
 ///**
 // * @author 千树星雨
@@ -32,6 +31,12 @@
 //    @Override
 //    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
 //        String token = request.getHeader("Authorization");
+//        if (token==null){
+//            //无缓存数据则创建新token
+//            token = UUID.randomUUID().toString();
+//            request.setAttribute("token", token);
+//            return true;
+//        }
 //        String tokenKey = LOGIN_TOKEN_KEY + token;
 //        Map<Object, Object> userMap = redisTemplate.opsForHash().entries(tokenKey);
 //        if (userMap != null && !userMap.isEmpty()) {

@@ -15,16 +15,15 @@
     <description>接口模块</description>
 
     <dependencies>
+        <!-- Nacos 服务注册发现 -->
+        <dependency>
+            <groupId>com.alibaba.cloud</groupId>
+            <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
+        </dependency>
         <!--StarApi SDK-->
         <dependency>
             <groupId>star.api</groupId>
             <artifactId>star-api-sdk</artifactId>
-            <version>0.0.1</version>
-        </dependency>
-        <!--StarApi common-->
-        <dependency>
-            <groupId>star.api</groupId>
-            <artifactId>star-api-common</artifactId>
             <version>0.0.1</version>
         </dependency>
         <!-- SpringBoot Web -->

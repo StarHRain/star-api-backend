@@ -23,18 +23,17 @@ import static star.api.sdk.utils.SignUtils.getSign;
  *  API 调用
  */
 public class StarApiClient {
-    public static String GATWAY_HOST="http://8.136.99.4:8090";
-
     private String accessKey;
 
     private String secretKey;
 
-    public StarApiClient(String accessKey, String secretKey) {
+    private String gatewayHost;
+
+    public StarApiClient(String accessKey, String secretKey, String gatewayHost) {
         this.accessKey = accessKey;
         this.secretKey = secretKey;
+        this.gatewayHost = gatewayHost;
     }
-
-    public void setGatwayHost(String gatwayHost) {GATWAY_HOST=gatwayHost;}
 
     private Map<String,String> getHeaderMap(String body,String method) {
         HashMap<String, String> map = new HashMap();
@@ -48,9 +47,13 @@ public class StarApiClient {
         return map;
     }
 
-    public String invokeInterface(String params,String url,String method) throws UnsupportedEncodingException {
-        HttpResponse httpResponse = HttpRequest.post(GATWAY_HOST + url)
+    public String invokeInterface(String params,String url,String method,String token) throws UnsupportedEncodingException {
+        HashMap<String, String> map = new HashMap<>();
+        map.put("server","interface");
+        map.put("Authorization",token);
+        HttpResponse httpResponse = HttpRequest.post(gatewayHost + url)
                 .header("Accept-Charset", CharsetUtil.UTF_8)
+                .addHeaders(map)
                 .addHeaders(getHeaderMap(params, method))
                 .body(params)
                 .execute();

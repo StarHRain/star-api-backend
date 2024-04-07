@@ -4,12 +4,160 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5c6732db-a192-445e-99da-5ca0f001d807" name="变更" comment="4.1 完善">
-      <change afterPath="$PROJECT_DIR$/star-api-interface/src/main/java/star/api/apiinterface/config/MyWebConfig.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/star-api-interface/src/main/java/star/api/apiinterface/controller/InterestingController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/star-api-interface/src/main/java/star/api/apiinterface/controller/NetEaseController.java" afterDir="false" />
+    <list default="true" id="5c6732db-a192-445e-99da-5ca0f001d807" name="变更" comment="4.1 新添接口">
+      <change afterPath="$PROJECT_DIR$/sql/seata_table.sql" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/star-api-admin/src/main/java/star/api/admin/config/MvcConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/star-api-chart/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/star-api-chart/src/main/java/star/api/chart/ChartApplication.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/star-api-chart/src/main/java/star/api/chart/annotation/AuthCheck.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/star-api-chart/src/main/java/star/api/chart/aop/AuthInterceptor.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/star-api-chart/src/main/java/star/api/chart/aop/LogInterceptor.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/star-api-chart/src/main/java/star/api/chart/config/GlobalExceptionHandler.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/star-api-chart/src/main/java/star/api/chart/config/JsonConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/star-api-chart/src/main/java/star/api/chart/config/Knife4jConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/star-api-chart/src/main/java/star/api/chart/config/MyBatisPlusConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/star-api-chart/src/main/java/star/api/chart/config/RedisTemplateConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/star-api-chart/src/main/java/star/api/chart/config/RedissonConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/star-api-chart/src/main/java/star/api/chart/constant/MqConstant.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/star-api-chart/src/main/java/star/api/chart/controller/ChartController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/star-api-chart/src/main/java/star/api/chart/controller/ImageController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/star-api-chart/src/main/java/star/api/chart/manager/RedisLimiterManager.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/star-api-chart/src/main/java/star/api/chart/mapper/ChartMapper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/star-api-chart/src/main/java/star/api/chart/mapper/ImageMapper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/star-api-chart/src/main/java/star/api/chart/mq/BiMessageConsumer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/star-api-chart/src/main/java/star/api/chart/mq/BiMessageProducer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/star-api-chart/src/main/java/star/api/chart/service/ChartService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/star-api-chart/src/main/java/star/api/chart/service/ImageService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/star-api-chart/src/main/java/star/api/chart/service/impl/AiService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/star-api-chart/src/main/java/star/api/chart/service/impl/ChartServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/star-api-chart/src/main/java/star/api/chart/service/impl/ImageServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/star-api-chart/src/main/java/star/api/chart/utils/BigModelChar.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/star-api-chart/src/main/java/star/api/chart/utils/BigModelImage.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/star-api-chart/src/main/java/star/api/chart/utils/ExcelUtils.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/star-api-chart/src/main/java/star/api/chart/utils/ImageUtil.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/star-api-chart/src/main/resources/application-prod.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/star-api-chart/src/main/resources/application.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/star-api-chart/src/main/resources/mapper/ChartMapper.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/star-api-chart/src/main/resources/mapper/ImageMapper.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/star-api-gateway/src/main/java/star/api/gateway/config/AuthProperties.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/star-api-gateway/src/main/java/star/api/gateway/config/CorsConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/star-api-gateway/src/main/java/star/api/gateway/config/JsonConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/star-api-gateway/src/main/java/star/api/gateway/constant/GatewayConstant.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/star-api-gateway/src/main/java/star/api/gateway/filter/AuthGlobalFilter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/star-api-gateway/src/main/java/star/api/gateway/filter/SignGatewayFilterFactory.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/star-api-gateway/src/main/java/star/api/gateway/utils/LogUtils.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/star-api-interfaceInfo/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/star-api-interfaceInfo/src/main/java/star/api/interfaceInfo/InterfaceInfoApplication.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/star-api-interfaceInfo/src/main/java/star/api/interfaceInfo/annotation/AuthCheck.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/star-api-interfaceInfo/src/main/java/star/api/interfaceInfo/aop/AuthInterceptor.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/star-api-interfaceInfo/src/main/java/star/api/interfaceInfo/aop/LogInterceptor.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/star-api-interfaceInfo/src/main/java/star/api/interfaceInfo/client/InterfaceClient.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/star-api-interfaceInfo/src/main/java/star/api/interfaceInfo/client/fallback/InterfaceClientFallbackFacory.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/star-api-interfaceInfo/src/main/java/star/api/interfaceInfo/config/FallbackFactoryConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/star-api-interfaceInfo/src/main/java/star/api/interfaceInfo/config/GatewayConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/star-api-interfaceInfo/src/main/java/star/api/interfaceInfo/config/GlobalExceptionHandler.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/star-api-interfaceInfo/src/main/java/star/api/interfaceInfo/config/JsonConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/star-api-interfaceInfo/src/main/java/star/api/interfaceInfo/config/Knife4jConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/star-api-interfaceInfo/src/main/java/star/api/interfaceInfo/config/MyBatisPlusConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/star-api-interfaceInfo/src/main/java/star/api/interfaceInfo/config/RedisTemplateConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/star-api-interfaceInfo/src/main/java/star/api/interfaceInfo/config/RedissonConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/star-api-interfaceInfo/src/main/java/star/api/interfaceInfo/config/ThreadPoolConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/star-api-interfaceInfo/src/main/java/star/api/interfaceInfo/constant/ThreadPoolContanst.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/star-api-interfaceInfo/src/main/java/star/api/interfaceInfo/controller/AnalysisController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/star-api-interfaceInfo/src/main/java/star/api/interfaceInfo/controller/InterfaceInfoController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/star-api-interfaceInfo/src/main/java/star/api/interfaceInfo/controller/UserInterfaceInfoController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/star-api-interfaceInfo/src/main/java/star/api/interfaceInfo/factory/ApiClientFactory.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/star-api-interfaceInfo/src/main/java/star/api/interfaceInfo/job/PreCacheJob.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/star-api-interfaceInfo/src/main/java/star/api/interfaceInfo/mapper/InterfaceInfoMapper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/star-api-interfaceInfo/src/main/java/star/api/interfaceInfo/mapper/UserInterfaceInfoMapper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/star-api-interfaceInfo/src/main/java/star/api/interfaceInfo/service/InterfaceInfoService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/star-api-interfaceInfo/src/main/java/star/api/interfaceInfo/service/UserInterfaceInfoService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/star-api-interfaceInfo/src/main/java/star/api/interfaceInfo/service/impl/AnalysisServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/star-api-interfaceInfo/src/main/java/star/api/interfaceInfo/service/impl/InterfaceInfoServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/star-api-interfaceInfo/src/main/java/star/api/interfaceInfo/service/impl/UserInterfaceInfoServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/star-api-interfaceInfo/src/main/java/star/api/interfaceInfo/service/impl/inner/InnerInterfaceInfoServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/star-api-interfaceInfo/src/main/java/star/api/interfaceInfo/service/impl/inner/InnerUserInterfaceInfoServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/star-api-interfaceInfo/src/main/resources/application-prod.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/star-api-interfaceInfo/src/main/resources/application.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/star-api-interfaceInfo/src/main/resources/mapper/InterfaceInfoMapper.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/star-api-interfaceInfo/src/main/resources/mapper/UserInterfaceInfoMapper.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/star-api-sdk/.idea/encodings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/star-api-sdk/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/star-api-sdk/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/star-api-user/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/star-api-user/src/main/java/star/api/user/annotation/AuthCheck.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/star-api-user/src/main/java/star/api/user/aop/AuthInterceptor.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/star-api-user/src/main/java/star/api/user/aop/LogInterceptor.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/star-api-user/src/main/java/star/api/user/config/GlobalExceptionHandler.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/star-api-user/src/main/java/star/api/user/config/JsonConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/star-api-user/src/main/java/star/api/user/config/Knife4jConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/star-api-user/src/main/java/star/api/user/config/MyBatisPlusConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/star-api-user/src/main/java/star/api/user/config/RedisTemplateConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/star-api-user/src/main/java/star/api/user/config/RedissonConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/star-api-user/src/main/java/star/api/user/controller/UserController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/star-api-user/src/main/java/star/api/user/mapper/UserMapper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/star-api-user/src/main/java/star/api/user/service/UserService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/star-api-user/src/main/java/star/api/user/service/impl/UserServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/star-api-user/src/main/java/star/api/user/service/impl/inner/InnerUserServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/star-api-user/src/main/resources/application-prod.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/star-api-user/src/main/resources/application.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/star-api-user/src/main/resources/mapper/UserMapper.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/84b3e69b-1dc8-4345-8a23-b36e592ff4f9.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/84b3e69b-1dc8-4345-8a23-b36e592ff4f9.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/84b3e69b-1dc8-4345-8a23-b36e592ff4f9/storage_v2/_src_/schema/sys.zb4BAA.zip" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/84b3e69b-1dc8-4345-8a23-b36e592ff4f9/storage_v2/_src_/schema/sys.zb4BAA.zip" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/c17ce3ae-1383-4d1b-b8a7-f5108f67311d.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/c17ce3ae-1383-4d1b-b8a7-f5108f67311d.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/star-api-admin/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/star-api-admin/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/star-api-admin/src/main/java/star/api/admin/aop/AuthInterceptor.java" beforeDir="false" afterPath="$PROJECT_DIR$/star-api-admin/src/main/java/star/api/admin/aop/AuthInterceptor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/star-api-admin/src/main/java/star/api/admin/config/BigModelCharConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/star-api-admin/src/main/java/star/api/admin/utils/BigModelChar.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/star-api-admin/src/main/java/star/api/admin/config/CorsConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/star-api-admin/src/main/java/star/api/admin/config/CorsConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/star-api-admin/src/main/java/star/api/admin/constant/ChartConstant.java" beforeDir="false" afterPath="$PROJECT_DIR$/star-api-common/src/main/java/star/api/constant/ChartConstant.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/star-api-admin/src/main/java/star/api/admin/constant/RedisConstant.java" beforeDir="false" afterPath="$PROJECT_DIR$/star-api-common/src/main/java/star/api/constant/RedisConstant.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/star-api-admin/src/main/java/star/api/admin/controller/ChartController.java" beforeDir="false" afterPath="$PROJECT_DIR$/star-api-admin/src/main/java/star/api/admin/controller/ChartController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/star-api-admin/src/main/java/star/api/admin/controller/ImageController.java" beforeDir="false" afterPath="$PROJECT_DIR$/star-api-admin/src/main/java/star/api/admin/controller/ImageController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/star-api-admin/src/main/java/star/api/admin/controller/InterfaceInfoController.java" beforeDir="false" afterPath="$PROJECT_DIR$/star-api-admin/src/main/java/star/api/admin/controller/InterfaceInfoController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/star-api-admin/src/main/java/star/api/admin/controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/star-api-admin/src/main/java/star/api/admin/controller/UserController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/star-api-admin/src/main/java/star/api/admin/controller/UserInterfaceInfoController.java" beforeDir="false" afterPath="$PROJECT_DIR$/star-api-admin/src/main/java/star/api/admin/controller/UserInterfaceInfoController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/star-api-admin/src/main/java/star/api/admin/exception/BusinessException.java" beforeDir="false" afterPath="$PROJECT_DIR$/star-api-common/src/main/java/star/api/exception/BusinessException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/star-api-admin/src/main/java/star/api/admin/exception/GlobalExceptionHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/star-api-admin/src/main/java/star/api/admin/config/GlobalExceptionHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/star-api-admin/src/main/java/star/api/admin/exception/ThrowUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/star-api-common/src/main/java/star/api/utils/ThrowUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/star-api-admin/src/main/java/star/api/admin/factory/ApiClientFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/star-api-admin/src/main/java/star/api/admin/factory/ApiClientFactory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/star-api-admin/src/main/java/star/api/admin/interceptor/TokenRefreshInterceptor.java" beforeDir="false" afterPath="$PROJECT_DIR$/star-api-admin/src/main/java/star/api/admin/interceptor/TokenRefreshInterceptor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/star-api-admin/src/main/java/star/api/admin/job/PreCacheJob.java" beforeDir="false" afterPath="$PROJECT_DIR$/star-api-admin/src/main/java/star/api/admin/job/PreCacheJob.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/star-api-admin/src/main/java/star/api/admin/manager/RedisLimiterManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/star-api-admin/src/main/java/star/api/admin/manager/RedisLimiterManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/star-api-admin/src/main/java/star/api/admin/mq/BiMessageConsumer.java" beforeDir="false" afterPath="$PROJECT_DIR$/star-api-admin/src/main/java/star/api/admin/mq/BiMessageConsumer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/star-api-admin/src/main/java/star/api/admin/service/ChartService.java" beforeDir="false" afterPath="$PROJECT_DIR$/star-api-admin/src/main/java/star/api/admin/service/ChartService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/star-api-admin/src/main/java/star/api/admin/service/impl/AiService.java" beforeDir="false" afterPath="$PROJECT_DIR$/star-api-admin/src/main/java/star/api/admin/service/impl/AiService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/star-api-admin/src/main/java/star/api/admin/service/impl/AnalysisServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/star-api-admin/src/main/java/star/api/admin/service/impl/AnalysisServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/star-api-admin/src/main/java/star/api/admin/service/impl/ChartServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/star-api-admin/src/main/java/star/api/admin/service/impl/ChartServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/star-api-admin/src/main/java/star/api/admin/service/impl/InterfaceInfoServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/star-api-admin/src/main/java/star/api/admin/service/impl/InterfaceInfoServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/star-api-admin/src/main/java/star/api/admin/service/impl/UserInterfaceInfoServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/star-api-admin/src/main/java/star/api/admin/service/impl/UserInterfaceInfoServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/star-api-admin/src/main/java/star/api/admin/service/impl/UserServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/star-api-admin/src/main/java/star/api/admin/service/impl/UserServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/star-api-admin/src/main/java/star/api/admin/service/impl/inner/InnerInterfaceInfoServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/star-api-admin/src/main/java/star/api/admin/service/impl/inner/InnerInterfaceInfoServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/star-api-admin/src/main/java/star/api/admin/service/impl/inner/InnerUserInterfaceInfoServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/star-api-admin/src/main/java/star/api/admin/service/impl/inner/InnerUserInterfaceInfoServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/star-api-admin/src/main/java/star/api/admin/utils/ExcelUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/star-api-admin/src/main/java/star/api/admin/utils/ExcelUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/star-api-admin/src/main/java/star/api/admin/utils/SqlUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/star-api-common/src/main/java/star/api/utils/SqlUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/star-api-common/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/star-api-common/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/star-api-common/src/main/java/star/api/common/BaseResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/star-api-common/src/main/java/star/api/common/BaseResponse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/star-api-common/src/main/java/star/api/common/RedisData.java" beforeDir="false" afterPath="$PROJECT_DIR$/star-api-common/src/main/java/star/api/common/RedisData.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/star-api-common/src/main/java/star/api/model/enums/InterfaceInfoStatusEnum.java" beforeDir="false" afterPath="$PROJECT_DIR$/star-api-common/src/main/java/star/api/model/enums/InterfaceInfoStatusEnum.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/star-api-common/src/main/java/star/api/service/InnerInterfaceInfoService.java" beforeDir="false" afterPath="$PROJECT_DIR$/star-api-common/src/main/java/star/api/service/InnerInterfaceInfoService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/star-api-common/src/main/java/star/api/service/InnerUserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/star-api-common/src/main/java/star/api/service/InnerUserService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/star-api-gateway/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/star-api-gateway/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/star-api-gateway/src/main/java/star/api/gateway/config/RedisTemplateConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/star-api-gateway/src/main/java/star/api/gateway/config/RedisTemplateConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/star-api-gateway/src/main/java/star/api/gateway/exception/BusinessException.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/star-api-gateway/src/main/java/star/api/gateway/exception/GlobalFilterExceptionHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/star-api-gateway/src/main/java/star/api/gateway/config/GlobalFilterExceptionHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/star-api-gateway/src/main/java/star/api/gateway/filter/CustomGlobalFilter.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/star-api-gateway/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/star-api-gateway/src/main/resources/application.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/star-api-interface/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/star-api-interface/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/star-api-interface/src/main/java/star/api/apiinterface/StarApiInterfaceApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/star-api-interface/src/main/java/star/api/apiinterface/StarApiInterfaceApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/star-api-interface/src/main/resources/application-prod.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/star-api-interface/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/star-api-interface/src/main/resources/application.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/star-api-sdk/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/star-api-sdk/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/star-api-sdk/src/main/java/star/api/sdk/StarApiClientConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/star-api-sdk/src/main/java/star/api/sdk/StarApiClientConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/star-api-sdk/src/main/java/star/api/sdk/client/StarApiClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/star-api-sdk/src/main/java/star/api/sdk/client/StarApiClient.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -59,64 +207,108 @@
   <component name="ProjectViewState">
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RequestMappingsPanelOrder0": "0",
-    "RequestMappingsPanelOrder1": "1",
-    "RequestMappingsPanelWidth0": "75",
-    "RequestMappingsPanelWidth1": "75",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "jdk.selected.JAVA_MODULE": "1.8",
-    "last_opened_file_path": "D:/Java/_星球项目/api-backend2/star-api-backend",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "模块",
-    "project.structure.proportion": "0.15625",
-    "project.structure.side.proportion": "0.19294989",
-    "settings.editor.selected.configurable": "MavenSettings",
-    "settings.editor.splitter.proportion": "0.26993865",
-    "spring.configuration.checksum": "a83af8074be89fb264674cbcc290078f",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
+    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
+    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
+    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;jdk.selected.JAVA_MODULE&quot;: &quot;1.8&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/Java/_星球项目/api-backend2/star-api-backend&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;模块&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15625&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.19294989&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
+    &quot;settings.editor.splitter.proportion&quot;: &quot;0.26993865&quot;,
+    &quot;spring.configuration.checksum&quot;: &quot;dfadaf0035ff72636fdc99d724161526&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
-  "keyToStringList": {
-    "ChangesTree.GroupingKeys": [
-      "directory",
-      "module"
+  &quot;keyToStringList&quot;: {
+    &quot;ChangesTree.GroupingKeys&quot;: [
+      &quot;directory&quot;,
+      &quot;module&quot;
     ],
-    "DatabaseDriversLRU": [
-      "mysql"
+    &quot;DatabaseDriversLRU&quot;: [
+      &quot;mysql&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="ReactorSettings">
     <option name="notificationShown" value="true" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="D:\Java\_星球项目\api-backend2\star-api-backend\star-bi-admin\src\main\java\star\api" />
-      <recent name="D:\Java\_星球项目\api-backend2\star-api-backend\star-bi-admin\src\main\java\star\api\admin" />
-      <recent name="D:\Java\_星球项目\api-backend2\star-api-backend\star-bi-admin\src\main\resources" />
-      <recent name="D:\Java\_星球项目\api-backend2\star-api-backend\star-bi-admin\src\main\java\star\api\admin\service\impl" />
-      <recent name="D:\Java\_星球项目\api-backend2\star-api-backend\star-bi-admin\src\main\java\star\api\admin\service" />
+      <recent name="D:\Java\_星球项目\api-backend2\star-api-backend\star-api-chart\src\main" />
+      <recent name="D:\Java\_星球项目\api-backend2\star-api-backend\star-api-chart\src\main\java\star\api\chart" />
+      <recent name="D:\Java\_星球项目\api-backend2\star-api-backend\star-api-interfaceInfo\src\main\java\star\api\interfaceInfo" />
+      <recent name="D:\Java\_星球项目\api-backend2\star-api-backend\star-api-user\src\main\java\star\api\user\service" />
+      <recent name="D:\Java\_星球项目\api-backend2\star-api-backend\star-api-common\src\main\java\star\api\service" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
-      <recent name="star.api.apiinterface.controller" />
-      <recent name="star.api.admin.manager" />
-      <recent name="star.api.admin.controller" />
-      <recent name="star.api.admin.service" />
-      <recent name="star.api.admin" />
+      <recent name="star.api.interfaceInfo.config" />
+      <recent name="star.api.gateway.config" />
+      <recent name="star.api.chart.config" />
+      <recent name="star.api.user.config" />
+      <recent name="star.api.service" />
     </key>
   </component>
-  <component name="RunManager" selected="Spring Boot.StarApiGatewayApplication">
+  <component name="RunManager" selected="Spring Boot.InterfaceInfoApplication">
     <configuration default="true" type="JUnit" factoryName="JUnit">
       <shortenClasspath name="MANIFEST" />
       <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ChartApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <option name="ALTERNATIVE_JRE_PATH" value="1.8" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
+      <module name="star-api-chart" />
+      <selectedOptions>
+        <option name="vmParameters" />
+      </selectedOptions>
+      <option name="SHORTEN_COMMAND_LINE" value="MANIFEST" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="star.api.chart.ChartApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="GatewayApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" temporary="true">
+      <module name="star-api-gateway" />
+      <option name="SHORTEN_COMMAND_LINE" value="MANIFEST" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="star.api.gateway.StarApiGatewayApplication" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="star.api.gateway.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="InterfaceApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="star-api-interface" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="star.api.apiinterface.StarApiInterfaceApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="InterfaceInfoApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <option name="ALTERNATIVE_JRE_PATH" value="1.8" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
+      <module name="star-api-interfaceInfo" />
+      <option name="SHORTEN_COMMAND_LINE" value="MANIFEST" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="star.api.interfaceInfo.InterfaceInfoApplication" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -135,36 +327,52 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="StarApiGatewayApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" temporary="true" nameIsGenerated="true">
-      <module name="star-api-gateway" />
+    <configuration name="UserApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <option name="ALTERNATIVE_JRE_PATH" value="1.8" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
+      <module name="star-api-user" />
       <option name="SHORTEN_COMMAND_LINE" value="MANIFEST" />
-      <option name="SPRING_BOOT_MAIN_CLASS" value="star.api.gateway.StarApiGatewayApplication" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="star.api.gateway.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
+      <option name="SPRING_BOOT_MAIN_CLASS" value="star.api.user.UserApplication" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="StarApiInterfaceApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
-      <module name="star-api-interface" />
-      <option name="SPRING_BOOT_MAIN_CLASS" value="star.api.apiinterface.StarApiInterfaceApplication" />
+    <configuration name="UserApplication(2)" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <option name="ALTERNATIVE_JRE_PATH" value="1.8" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
+      <module name="star-api-user" />
+      <option name="SHORTEN_COMMAND_LINE" value="MANIFEST" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="star.api.user.UserApplication" />
+      <option name="VM_PARAMETERS" value="-Dserver.port=8091" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
     <configuration default="true" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <option name="ALTERNATIVE_JRE_PATH" value="1.8" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
+      <module name="star-api-interface" />
+      <selectedOptions>
+        <option name="vmParameters" />
+      </selectedOptions>
       <option name="SHORTEN_COMMAND_LINE" value="MANIFEST" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="star.api.apiinterface.StarApiInterfaceApplication" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <list>
+      <item itemvalue="Spring Boot.ChartApplication" />
+      <item itemvalue="Spring Boot.InterfaceInfoApplication" />
+      <item itemvalue="Spring Boot.UserApplication" />
+      <item itemvalue="Spring Boot.UserApplication(2)" />
+      <item itemvalue="Spring Boot.InterfaceApplication" />
+      <item itemvalue="Spring Boot.MyApplication" />
+      <item itemvalue="Spring Boot.GatewayApplication" />
+    </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Spring Boot.StarApiGatewayApplication" />
+        <item itemvalue="Spring Boot.GatewayApplication" />
         <item itemvalue="Spring Boot.MyApplication" />
       </list>
     </recent_temporary>
@@ -202,7 +410,35 @@
       <workItem from="1711944226401" duration="2344000" />
       <workItem from="1711963397288" duration="1276000" />
       <workItem from="1711964688050" duration="244000" />
-      <workItem from="1711965060753" duration="6407000" />
+      <workItem from="1711965060753" duration="7938000" />
+      <workItem from="1711975489606" duration="446000" />
+      <workItem from="1711975945472" duration="546000" />
+      <workItem from="1711976505110" duration="143000" />
+      <workItem from="1711976662426" duration="779000" />
+      <workItem from="1711995896065" duration="6897000" />
+      <workItem from="1712049146912" duration="13253000" />
+      <workItem from="1712071397305" duration="762000" />
+      <workItem from="1712072169043" duration="11223000" />
+      <workItem from="1712218506975" duration="4195000" />
+      <workItem from="1712225296954" duration="21769000" />
+      <workItem from="1712253130680" duration="1590000" />
+      <workItem from="1712254758408" duration="160000" />
+      <workItem from="1712255357167" duration="700000" />
+      <workItem from="1712256065935" duration="1231000" />
+      <workItem from="1712257306449" duration="406000" />
+      <workItem from="1712257764686" duration="7866000" />
+      <workItem from="1712271273885" duration="744000" />
+      <workItem from="1712272027334" duration="4879000" />
+      <workItem from="1712312185071" duration="6135000" />
+      <workItem from="1712333553690" duration="8731000" />
+      <workItem from="1712342351933" duration="5371000" />
+      <workItem from="1712400474427" duration="6823000" />
+      <workItem from="1712407321385" duration="8507000" />
+      <workItem from="1712423793654" duration="1494000" />
+      <workItem from="1712425298074" duration="734000" />
+      <workItem from="1712426044062" duration="416000" />
+      <workItem from="1712426470480" duration="6620000" />
+      <workItem from="1712485360578" duration="8312000" />
     </task>
     <task id="LOCAL-00001" summary="开放接口平台后端源码">
       <created>1710346677211</created>
@@ -260,7 +496,14 @@
       <option name="project" value="LOCAL" />
       <updated>1711966925283</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="4.1 新添接口">
+      <created>1711973755489</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1711973755489</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -283,55 +526,26 @@
     <MESSAGE value="3.16 解决了大量线程请求获取接口页时导致的缓存穿透（数据库没数据缓存空置）和缓存击穿（运用互斥锁和逻辑过期）问题，构建线程池，异步执行缓存重建" />
     <MESSAGE value="3.31 加入了BI项目整合" />
     <MESSAGE value="4.1 完善" />
-    <option name="LAST_COMMIT_MESSAGE" value="4.1 完善" />
+    <MESSAGE value="4.1 新添接口" />
+    <option name="LAST_COMMIT_MESSAGE" value="4.1 新添接口" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/star-api-interface/src/main/java/star/api/apiinterface/controller/InterestingController.java</url>
-          <line>20</line>
-          <option name="timeStamp" value="2" />
+          <url>file://$PROJECT_DIR$/star-api-gateway/src/main/java/star/api/gateway/filter/AuthGlobalFilter.java</url>
+          <line>65</line>
+          <option name="timeStamp" value="42" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/star-api-sdk/src/main/java/star/api/sdk/client/StarApiClient.java</url>
-          <line>53</line>
-          <option name="timeStamp" value="10" />
+          <url>file://$PROJECT_DIR$/star-api-gateway/src/main/java/star/api/gateway/filter/SignGatewayFilterFactory.java</url>
+          <line>78</line>
+          <option name="timeStamp" value="43" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/star-api-interface/src/main/java/star/api/apiinterface/controller/InterestingController.java</url>
-          <line>38</line>
-          <option name="timeStamp" value="12" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/star-api-gateway/src/main/java/star/api/gateway/filter/CustomGlobalFilter.java</url>
-          <line>99</line>
-          <option name="timeStamp" value="15" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/star-api-gateway/src/main/java/star/api/gateway/filter/CustomGlobalFilter.java</url>
-          <line>155</line>
-          <option name="timeStamp" value="16" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/star-api-interface/src/main/java/star/api/apiinterface/controller/InterestingController.java</url>
-          <line>29</line>
-          <option name="timeStamp" value="17" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/star-api-interface/src/main/java/star/api/apiinterface/controller/InterestingController.java</url>
-          <line>48</line>
-          <option name="timeStamp" value="18" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/star-api-interface/src/main/java/star/api/apiinterface/controller/NetEaseController.java</url>
-          <line>20</line>
-          <option name="timeStamp" value="19" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/star-api-interface/src/main/java/star/api/apiinterface/controller/NetEaseController.java</url>
-          <line>31</line>
-          <option name="timeStamp" value="20" />
+          <url>file://$PROJECT_DIR$/star-api-interfaceInfo/src/main/java/star/api/interfaceInfo/service/impl/InterfaceInfoServiceImpl.java</url>
+          <line>482</line>
+          <option name="timeStamp" value="52" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
@@ -341,6 +555,11 @@
         <PinnedItemInfo parentTag="cn.hutool.http.HttpConnection" memberName="conn" />
       </pinned-members>
     </pin-to-top-manager>
+    <watches-manager>
+      <configuration name="SpringBootApplicationConfigurationType">
+        <watch expression="((DecodeException)e).detailMessage" custom="feign.codec.DecodeException" />
+      </configuration>
+    </watches-manager>
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

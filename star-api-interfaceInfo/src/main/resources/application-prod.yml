@@ -1,0 +1,38 @@
+spring:
+  # MySQL 配置
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://8.136.99.4:3306/star_api
+    username: star
+    password: Hy123456
+  # Redis 配置
+  redis:
+    host: 8.136.99.4
+    port: 6379
+    password: Hy123456
+    database: 0
+  # session 配置
+  session:
+    store-type: redis # 分布式 Session
+    timeout: 2592000 # 30天过期
+  # RabbitMQ
+  rabbitmq:
+    host: 8.136.99.4
+    port: 5672
+    username: admin
+    password: Hy123456
+star:
+  # 网关 URL
+  gateway:
+    host: http://8.136.99.4:8090
+
+# Dubbo 配置
+dubbo:
+  application:
+    name: interfaceInfo-provider
+  protocol:
+    name: dubbo
+    port: -1
+  registry:
+    id: nacos-registry
+    address: nacos://8.136.99.4:8848

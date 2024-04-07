@@ -1,23 +1,25 @@
 package star.api.admin.controller;
 
-import cn.hutool.json.JSONUtil;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.web.bind.annotation.*;
 import star.api.admin.annotation.AuthCheck;
-import star.api.admin.exception.BusinessException;
-import star.api.admin.exception.ThrowUtils;
 import star.api.admin.service.UserService;
-import star.api.common.*;
+import star.api.common.BaseResponse;
+import star.api.common.DeleteRequest;
+import star.api.common.ErrorCode;
+import star.api.common.ResultUtils;
 import star.api.constant.UserConstant;
+import star.api.exception.BusinessException;
+import star.api.exception.ThrowUtils;
 import star.api.model.dto.user.*;
 import star.api.model.entity.User;
-import star.api.model.vo.LoginUserVO;
 import star.api.model.vo.UserVO;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 import java.util.UUID;
 
@@ -66,8 +68,8 @@ public class UserController {
      * @return
      */
     @PostMapping("/login")
-    public BaseResponse<UserVO> userLogin(@RequestBody UserLoginRequest userLoginRequest, HttpServletRequest request) {
-        String token = (String) request.getAttribute("token");
+    public BaseResponse<UserVO> userLogin(@RequestBody UserLoginRequest userLoginRequest, HttpServletRequest request, HttpServletResponse response) {
+        String token = UUID.randomUUID().toString();
         return ResultUtils.successToken(userService.userLogin(userLoginRequest,token, request),token);
     }
 

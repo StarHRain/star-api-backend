@@ -1,6 +1,5 @@
 package star.api.admin.factory;
 
-import co.elastic.clients.ApiClient;
 import lombok.Data;
 import star.api.model.entity.User;
 import star.api.sdk.client.StarApiClient;

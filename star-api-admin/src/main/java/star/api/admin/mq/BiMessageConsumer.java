@@ -8,18 +8,17 @@ import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.amqp.support.AmqpHeaders;
 import org.springframework.messaging.handler.annotation.Header;
 import org.springframework.stereotype.Component;
-import star.api.admin.exception.BusinessException;
 import star.api.admin.service.ChartService;
 import star.api.admin.service.impl.AiService;
 import star.api.common.ErrorCode;
+import star.api.exception.BusinessException;
 import star.api.model.entity.Chart;
 import star.api.model.vo.AiResultVO;
 
 import javax.annotation.Resource;
 
-import static star.api.admin.constant.ChartConstant.*;
 import static star.api.admin.constant.MqConstant.BI_QUEUE_NAME;
-import static star.api.constant.CommonConstant.BI_MODEL_ID;
+import static star.api.constant.ChartConstant.*;
 
 /**
  * @author 千树星雨

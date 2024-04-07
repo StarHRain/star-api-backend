@@ -1,13 +1,10 @@
 package star.api.admin.service.impl.inner;
 
-import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
-import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import org.apache.dubbo.config.annotation.DubboService;
-import star.api.admin.exception.BusinessException;
-import star.api.admin.exception.ThrowUtils;
 import star.api.admin.service.UserInterfaceInfoService;
-import star.api.admin.service.UserService;
 import star.api.common.ErrorCode;
+import star.api.exception.BusinessException;
+import star.api.exception.ThrowUtils;
 import star.api.model.entity.UserInterfaceInfo;
 import star.api.service.InnerUserInterfaceInfoService;
 

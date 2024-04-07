@@ -15,19 +15,16 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import star.api.admin.config.GatewayConfig;
-import star.api.admin.config.ThreadPoolConfig;
-import star.api.admin.exception.BusinessException;
-import star.api.admin.exception.ThrowUtils;
 import star.api.admin.factory.ApiClientFactory;
 import star.api.admin.mapper.InterfaceInfoMapper;
 import star.api.admin.service.InterfaceInfoService;
 import star.api.admin.service.UserInterfaceInfoService;
 import star.api.admin.service.UserService;
-import star.api.admin.utils.SqlUtils;
 import star.api.common.DeleteRequest;
 import star.api.common.ErrorCode;
 import star.api.common.IdRequest;
 import star.api.common.RedisData;
+import star.api.exception.BusinessException;
 import star.api.model.dto.interfaceinfo.InterfaceInfoAddRequest;
 import star.api.model.dto.interfaceinfo.InterfaceInfoInvokeRequest;
 import star.api.model.dto.interfaceinfo.InterfaceInfoQueryRequest;
@@ -40,19 +37,19 @@ import star.api.model.vo.RequestParamsRemarkVO;
 import star.api.model.vo.ResponseParamsRemarkVO;
 import star.api.model.vo.UserVO;
 import star.api.sdk.client.StarApiClient;
+import star.api.utils.SqlUtils;
+import star.api.utils.ThrowUtils;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.time.LocalDateTime;
 import java.util.*;
-import java.util.concurrent.Future;
 import java.util.concurrent.ThreadPoolExecutor;
-import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
-import static star.api.admin.constant.RedisConstant.*;
 import static star.api.constant.CommonConstant.SORT_ORDER_ASC;
 import static star.api.constant.CommonConstant.SORT_ORDER_DESC;
+import static star.api.constant.RedisConstant.*;
 import static star.api.model.enums.InterfaceInfoStatusEnum.OFFLINE;
 import static star.api.model.enums.InterfaceInfoStatusEnum.ONLINE;
 
@@ -465,16 +462,15 @@ public class InterfaceInfoServiceImpl extends ServiceImpl<InterfaceInfoMapper, I
 
         //获取SDK客户端
         StarApiClient appClient = new ApiClientFactory().getApiClient(userService.getLoginUser(request));
-        //设置网关地址
-        appClient.setGatwayHost(gatewayConfig.getHost());
 
         String url = interfaceInfo.getUrl();
         String method = interfaceInfo.getMethod();
         String requestParams = interfaceInfo.getRequestParams();
 
+        String token = request.getHeader("Authorization");
         String response = null;
         try {
-            response = appClient.invokeInterface(requestParams, url, method);
+            response = appClient.invokeInterface(requestParams, url, method,token);
             ThrowUtils.throwIf(StringUtils.isBlank(response), ErrorCode.OPERATION_ERROR);
         } catch (Exception e) {
             throw new BusinessException(ErrorCode.OPERATION_ERROR, "接口调用失败");

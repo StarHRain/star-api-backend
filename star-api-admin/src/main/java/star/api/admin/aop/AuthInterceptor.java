@@ -10,9 +10,9 @@ import org.springframework.web.context.request.RequestAttributes;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 import star.api.admin.annotation.AuthCheck;
-import star.api.admin.exception.BusinessException;
 import star.api.admin.service.UserService;
 import star.api.common.ErrorCode;
+import star.api.exception.BusinessException;
 import star.api.model.entity.User;
 
 import javax.annotation.Resource;

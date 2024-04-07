@@ -2,9 +2,7 @@ package star.api.admin.service;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.IService;
-import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.multipart.MultipartFile;
-import star.api.common.BaseResponse;
 import star.api.common.DeleteRequest;
 import star.api.model.dto.chart.*;
 import star.api.model.entity.Chart;

@@ -15,16 +15,25 @@
     <description>服务网关</description>
 
     <dependencies>
+        <!-- Sentinel -->
+<!--        <dependency>-->
+<!--            <groupId>com.alibaba.cloud</groupId>-->
+<!--            <artifactId>spring-cloud-starter-alibaba-sentinel</artifactId>-->
+<!--        </dependency>-->
+        <!--负载均衡-->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-loadbalancer</artifactId>
+        </dependency>
+        <!-- Nacos 服务注册发现 -->
+        <dependency>
+            <groupId>com.alibaba.cloud</groupId>
+            <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
+        </dependency>
         <!--StarApi SDK-->
         <dependency>
             <groupId>star.api</groupId>
             <artifactId>star-api-sdk</artifactId>
-            <version>0.0.1</version>
-        </dependency>
-        <!--StarApi common-->
-        <dependency>
-            <groupId>star.api</groupId>
-            <artifactId>star-api-common</artifactId>
             <version>0.0.1</version>
         </dependency>
         <!--引入Redis-->
@@ -56,11 +65,14 @@
             <artifactId>dubbo</artifactId>
             <version>3.0.9</version>
         </dependency>
-        <!-- Nacos -->
+        <!-- Gson -->
         <dependency>
-            <groupId>com.alibaba.nacos</groupId>
-            <artifactId>nacos-client</artifactId>
-            <version>2.1.0</version>
+            <groupId>com.google.code.gson</groupId>
+            <artifactId>gson</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>star.api</groupId>
+            <artifactId>star-api-common</artifactId>
         </dependency>
     </dependencies>
 

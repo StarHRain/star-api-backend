@@ -22,8 +22,10 @@ public class StarApiClientConfig {
 
     private String secretKey;
 
+    private String gatewayHost;
+
     @Bean
     public StarApiClient getStarApiClient() {
-        return new StarApiClient(accessKey, secretKey);
+        return new StarApiClient(accessKey, secretKey,gatewayHost);
     }
 }

@@ -5,11 +5,15 @@
     <option name="originalFiles">
       <list>
         <option value="$PROJECT_DIR$/pom.xml" />
+        <option value="$PROJECT_DIR$/star_api_sdk/pom.xml" />
+        <option value="$PROJECT_DIR$/star-api-sdk/pom.xml" />
       </list>
     </option>
     <option name="ignoredFiles">
       <set>
+        <option value="$PROJECT_DIR$/interface-test/pom.xml" />
         <option value="$PROJECT_DIR$/star-bi-admin/pom.xml" />
+        <option value="$PROJECT_DIR$/star_api_sdk/pom.xml" />
       </set>
     </option>
   </component>

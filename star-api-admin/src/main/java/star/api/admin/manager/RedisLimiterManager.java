@@ -5,8 +5,8 @@ import org.redisson.api.RateIntervalUnit;
 import org.redisson.api.RateType;
 import org.redisson.api.RedissonClient;
 import org.springframework.stereotype.Service;
-import star.api.admin.exception.BusinessException;
 import star.api.common.ErrorCode;
+import star.api.exception.BusinessException;
 
 import javax.annotation.Resource;
 

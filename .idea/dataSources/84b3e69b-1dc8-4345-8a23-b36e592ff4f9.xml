@@ -1,0 +1,477 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataSource name="@localhost">
+  <database-model serializer="dbm" dbms="MYSQL" family-id="MYSQL" format-version="4.48">
+    <root id="1">
+      <DefaultCasing>lower/lower</DefaultCasing>
+      <DefaultEngine>InnoDB</DefaultEngine>
+      <DefaultTmpEngine>InnoDB</DefaultTmpEngine>
+      <ServerVersion>5.7.40</ServerVersion>
+    </root>
+    <schema id="2" parent="1" name="information_schema">
+      <CollationName>utf8_general_ci</CollationName>
+    </schema>
+    <schema id="3" parent="1" name="my_db">
+      <CollationName>latin1_swedish_ci</CollationName>
+    </schema>
+    <schema id="4" parent="1" name="mysql">
+      <CollationName>latin1_swedish_ci</CollationName>
+    </schema>
+    <schema id="5" parent="1" name="performance_schema">
+      <CollationName>utf8_general_ci</CollationName>
+    </schema>
+    <schema id="6" parent="1" name="star">
+      <CollationName>latin1_swedish_ci</CollationName>
+    </schema>
+    <schema id="7" parent="1" name="star_api">
+      <CollationName>latin1_swedish_ci</CollationName>
+    </schema>
+    <schema id="8" parent="1" name="sys">
+      <CollationName>utf8_general_ci</CollationName>
+    </schema>
+    <table id="9" parent="7" name="chart">
+      <Comment>图表信息表</Comment>
+      <Engine>InnoDB</Engine>
+      <CollationName>utf8mb4_unicode_ci</CollationName>
+    </table>
+    <table id="10" parent="7" name="image">
+      <Comment>图片分析表</Comment>
+      <Engine>InnoDB</Engine>
+      <CollationName>utf8mb4_unicode_ci</CollationName>
+    </table>
+    <table id="11" parent="7" name="interface_info">
+      <Comment>接口信息</Comment>
+      <Engine>InnoDB</Engine>
+      <CollationName>utf8mb4_unicode_ci</CollationName>
+    </table>
+    <table id="12" parent="7" name="user">
+      <Comment>用户</Comment>
+      <Engine>InnoDB</Engine>
+      <CollationName>utf8mb4_unicode_ci</CollationName>
+    </table>
+    <table id="13" parent="7" name="user_interface_info">
+      <Comment>用户调用接口关系</Comment>
+      <Engine>InnoDB</Engine>
+      <CollationName>latin1_swedish_ci</CollationName>
+    </table>
+    <column id="14" parent="9" name="id">
+      <AutoIncrement>1772851093647237122</AutoIncrement>
+      <Comment>id</Comment>
+      <DasType>bigint(20)|0s</DasType>
+      <NotNull>1</NotNull>
+      <Position>1</Position>
+    </column>
+    <column id="15" parent="9" name="goal">
+      <Comment>分析目标</Comment>
+      <DasType>text|0s</DasType>
+      <Position>2</Position>
+    </column>
+    <column id="16" parent="9" name="name">
+      <Comment>图表名称</Comment>
+      <DasType>varchar(128)|0s</DasType>
+      <Position>3</Position>
+    </column>
+    <column id="17" parent="9" name="chartData">
+      <Comment>图表数据</Comment>
+      <DasType>text|0s</DasType>
+      <Position>4</Position>
+    </column>
+    <column id="18" parent="9" name="chartType">
+      <Comment>图表类型</Comment>
+      <DasType>varchar(128)|0s</DasType>
+      <Position>5</Position>
+    </column>
+    <column id="19" parent="9" name="genChart">
+      <Comment>生成的图表数据</Comment>
+      <DasType>text|0s</DasType>
+      <Position>6</Position>
+    </column>
+    <column id="20" parent="9" name="genResult">
+      <Comment>生成的分析结论</Comment>
+      <DasType>text|0s</DasType>
+      <Position>7</Position>
+    </column>
+    <column id="21" parent="9" name="status">
+      <Comment>wait,running,succeed,failed</Comment>
+      <DasType>varchar(128)|0s</DasType>
+      <DefaultExpression>&apos;wait&apos;</DefaultExpression>
+      <NotNull>1</NotNull>
+      <Position>8</Position>
+    </column>
+    <column id="22" parent="9" name="execMessage">
+      <Comment>执行信息</Comment>
+      <DasType>text|0s</DasType>
+      <Position>9</Position>
+    </column>
+    <column id="23" parent="9" name="userId">
+      <Comment>创建用户 id</Comment>
+      <DasType>bigint(20)|0s</DasType>
+      <Position>10</Position>
+    </column>
+    <column id="24" parent="9" name="createTime">
+      <Comment>创建时间</Comment>
+      <DasType>datetime|0s</DasType>
+      <DefaultExpression>CURRENT_TIMESTAMP</DefaultExpression>
+      <NotNull>1</NotNull>
+      <Position>11</Position>
+    </column>
+    <column id="25" parent="9" name="updateTime">
+      <Comment>更新时间</Comment>
+      <DasType>datetime|0s</DasType>
+      <DefaultExpression>CURRENT_TIMESTAMP</DefaultExpression>
+      <NotNull>1</NotNull>
+      <OnUpdate>CURRENT_TIMESTAMP</OnUpdate>
+      <Position>12</Position>
+    </column>
+    <column id="26" parent="9" name="isDelete">
+      <Comment>是否删除</Comment>
+      <DasType>tinyint(4)|0s</DasType>
+      <DefaultExpression>0</DefaultExpression>
+      <NotNull>1</NotNull>
+      <Position>13</Position>
+    </column>
+    <index id="27" parent="9" name="PRIMARY">
+      <ColNames>id</ColNames>
+      <Type>btree</Type>
+      <Unique>1</Unique>
+    </index>
+    <key id="28" parent="9" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <Primary>1</Primary>
+      <UnderlyingIndexName>PRIMARY</UnderlyingIndexName>
+    </key>
+    <column id="29" parent="10" name="id">
+      <AutoIncrement>1773347827224645635</AutoIncrement>
+      <Comment>id</Comment>
+      <DasType>bigint(20)|0s</DasType>
+      <NotNull>1</NotNull>
+      <Position>1</Position>
+    </column>
+    <column id="30" parent="10" name="goal">
+      <Comment>分析目标</Comment>
+      <DasType>text|0s</DasType>
+      <Position>2</Position>
+    </column>
+    <column id="31" parent="10" name="imageType">
+      <Comment>图片类型</Comment>
+      <DasType>varchar(512)|0s</DasType>
+      <Position>3</Position>
+    </column>
+    <column id="32" parent="10" name="genResult">
+      <Comment>生成的分析结论</Comment>
+      <DasType>text|0s</DasType>
+      <Position>4</Position>
+    </column>
+    <column id="33" parent="10" name="createTime">
+      <Comment>创建时间</Comment>
+      <DasType>datetime|0s</DasType>
+      <DefaultExpression>CURRENT_TIMESTAMP</DefaultExpression>
+      <NotNull>1</NotNull>
+      <Position>5</Position>
+    </column>
+    <column id="34" parent="10" name="updateTime">
+      <Comment>更新时间</Comment>
+      <DasType>datetime|0s</DasType>
+      <DefaultExpression>CURRENT_TIMESTAMP</DefaultExpression>
+      <NotNull>1</NotNull>
+      <OnUpdate>CURRENT_TIMESTAMP</OnUpdate>
+      <Position>6</Position>
+    </column>
+    <column id="35" parent="10" name="isDelete">
+      <Comment>是否删除</Comment>
+      <DasType>tinyint(4)|0s</DasType>
+      <DefaultExpression>0</DefaultExpression>
+      <NotNull>1</NotNull>
+      <Position>7</Position>
+    </column>
+    <index id="36" parent="10" name="PRIMARY">
+      <ColNames>id</ColNames>
+      <Type>btree</Type>
+      <Unique>1</Unique>
+    </index>
+    <key id="37" parent="10" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <Primary>1</Primary>
+      <UnderlyingIndexName>PRIMARY</UnderlyingIndexName>
+    </key>
+    <column id="38" parent="11" name="id">
+      <AutoIncrement>35</AutoIncrement>
+      <Comment>主键</Comment>
+      <DasType>bigint(20)|0s</DasType>
+      <NotNull>1</NotNull>
+      <Position>1</Position>
+    </column>
+    <column id="39" parent="11" name="name">
+      <Comment>名称</Comment>
+      <DasType>varchar(256)|0s</DasType>
+      <NotNull>1</NotNull>
+      <Position>2</Position>
+    </column>
+    <column id="40" parent="11" name="description">
+      <Comment>描述</Comment>
+      <DasType>varchar(256)|0s</DasType>
+      <Position>3</Position>
+    </column>
+    <column id="41" parent="11" name="url">
+      <Comment>接口地址</Comment>
+      <DasType>varchar(512)|0s</DasType>
+      <NotNull>1</NotNull>
+      <Position>4</Position>
+    </column>
+    <column id="42" parent="11" name="host">
+      <Comment>主机名</Comment>
+      <DasType>varchar(512)|0s</DasType>
+      <Position>5</Position>
+    </column>
+    <column id="43" parent="11" name="requestParams">
+      <Comment>请求参数</Comment>
+      <DasType>text|0s</DasType>
+      <Position>6</Position>
+    </column>
+    <column id="44" parent="11" name="requestParamsRemark">
+      <Comment>请求参数说明</Comment>
+      <DasType>text|0s</DasType>
+      <Position>7</Position>
+    </column>
+    <column id="45" parent="11" name="responseParamsRemark">
+      <Comment>响应参数说明</Comment>
+      <DasType>text|0s</DasType>
+      <Position>8</Position>
+    </column>
+    <column id="46" parent="11" name="requestHeader">
+      <Comment>请求头</Comment>
+      <DasType>text|0s</DasType>
+      <Position>9</Position>
+    </column>
+    <column id="47" parent="11" name="responseHeader">
+      <Comment>响应头</Comment>
+      <DasType>text|0s</DasType>
+      <Position>10</Position>
+    </column>
+    <column id="48" parent="11" name="status">
+      <Comment>接口状态（0-关闭，1-开启）</Comment>
+      <DasType>int(11)|0s</DasType>
+      <DefaultExpression>0</DefaultExpression>
+      <NotNull>1</NotNull>
+      <Position>11</Position>
+    </column>
+    <column id="49" parent="11" name="method">
+      <Comment>请求类型</Comment>
+      <DasType>varchar(256)|0s</DasType>
+      <NotNull>1</NotNull>
+      <Position>12</Position>
+    </column>
+    <column id="50" parent="11" name="userId">
+      <Comment>创建人</Comment>
+      <DasType>bigint(20)|0s</DasType>
+      <NotNull>1</NotNull>
+      <Position>13</Position>
+    </column>
+    <column id="51" parent="11" name="createTime">
+      <Comment>创建时间</Comment>
+      <DasType>datetime|0s</DasType>
+      <DefaultExpression>CURRENT_TIMESTAMP</DefaultExpression>
+      <NotNull>1</NotNull>
+      <Position>14</Position>
+    </column>
+    <column id="52" parent="11" name="updateTime">
+      <Comment>更新时间</Comment>
+      <DasType>datetime|0s</DasType>
+      <DefaultExpression>CURRENT_TIMESTAMP</DefaultExpression>
+      <NotNull>1</NotNull>
+      <OnUpdate>CURRENT_TIMESTAMP</OnUpdate>
+      <Position>15</Position>
+    </column>
+    <column id="53" parent="11" name="isDelete">
+      <Comment>是否删除(0-未删, 1-已删)</Comment>
+      <DasType>tinyint(4)|0s</DasType>
+      <DefaultExpression>0</DefaultExpression>
+      <NotNull>1</NotNull>
+      <Position>16</Position>
+    </column>
+    <index id="54" parent="11" name="PRIMARY">
+      <ColNames>id</ColNames>
+      <Type>btree</Type>
+      <Unique>1</Unique>
+    </index>
+    <key id="55" parent="11" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <Primary>1</Primary>
+      <UnderlyingIndexName>PRIMARY</UnderlyingIndexName>
+    </key>
+    <column id="56" parent="12" name="id">
+      <AutoIncrement>9</AutoIncrement>
+      <Comment>id</Comment>
+      <DasType>bigint(8)|0s</DasType>
+      <NotNull>1</NotNull>
+      <Position>1</Position>
+    </column>
+    <column id="57" parent="12" name="userAccount">
+      <Comment>账号</Comment>
+      <DasType>varchar(256)|0s</DasType>
+      <NotNull>1</NotNull>
+      <Position>2</Position>
+    </column>
+    <column id="58" parent="12" name="userPassword">
+      <Comment>密码</Comment>
+      <DasType>varchar(512)|0s</DasType>
+      <NotNull>1</NotNull>
+      <Position>3</Position>
+    </column>
+    <column id="59" parent="12" name="unionId">
+      <Comment>微信开放平台id</Comment>
+      <DasType>varchar(256)|0s</DasType>
+      <Position>4</Position>
+    </column>
+    <column id="60" parent="12" name="mpOpenId">
+      <Comment>公众号openId</Comment>
+      <DasType>varchar(256)|0s</DasType>
+      <Position>5</Position>
+    </column>
+    <column id="61" parent="12" name="userName">
+      <Comment>用户昵称</Comment>
+      <DasType>varchar(256)|0s</DasType>
+      <Position>6</Position>
+    </column>
+    <column id="62" parent="12" name="userAvatar">
+      <Comment>用户头像</Comment>
+      <DasType>varchar(1024)|0s</DasType>
+      <Position>7</Position>
+    </column>
+    <column id="63" parent="12" name="userProfile">
+      <Comment>用户简介</Comment>
+      <DasType>varchar(512)|0s</DasType>
+      <Position>8</Position>
+    </column>
+    <column id="64" parent="12" name="userRole">
+      <Comment>用户角色：user/admin/ban</Comment>
+      <DasType>varchar(256)|0s</DasType>
+      <DefaultExpression>&apos;user&apos;</DefaultExpression>
+      <NotNull>1</NotNull>
+      <Position>9</Position>
+    </column>
+    <column id="65" parent="12" name="accessKey">
+      <Comment>accessKey</Comment>
+      <DasType>varchar(512)|0s</DasType>
+      <NotNull>1</NotNull>
+      <Position>10</Position>
+    </column>
+    <column id="66" parent="12" name="secretKey">
+      <Comment>secretKey</Comment>
+      <DasType>varchar(512)|0s</DasType>
+      <NotNull>1</NotNull>
+      <Position>11</Position>
+    </column>
+    <column id="67" parent="12" name="createTime">
+      <Comment>创建时间</Comment>
+      <DasType>datetime|0s</DasType>
+      <DefaultExpression>CURRENT_TIMESTAMP</DefaultExpression>
+      <NotNull>1</NotNull>
+      <Position>12</Position>
+    </column>
+    <column id="68" parent="12" name="updateTime">
+      <Comment>更新时间</Comment>
+      <DasType>datetime|0s</DasType>
+      <DefaultExpression>CURRENT_TIMESTAMP</DefaultExpression>
+      <NotNull>1</NotNull>
+      <OnUpdate>CURRENT_TIMESTAMP</OnUpdate>
+      <Position>13</Position>
+    </column>
+    <column id="69" parent="12" name="isDelete">
+      <Comment>是否删除</Comment>
+      <DasType>tinyint(4)|0s</DasType>
+      <DefaultExpression>0</DefaultExpression>
+      <NotNull>1</NotNull>
+      <Position>14</Position>
+    </column>
+    <index id="70" parent="12" name="PRIMARY">
+      <ColNames>id</ColNames>
+      <Type>btree</Type>
+      <Unique>1</Unique>
+    </index>
+    <index id="71" parent="12" name="idx_unionId">
+      <ColNames>unionId</ColNames>
+      <Type>btree</Type>
+    </index>
+    <index id="72" parent="12" name="idx_userName">
+      <ColNames>userName</ColNames>
+      <Type>btree</Type>
+    </index>
+    <key id="73" parent="12" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <Primary>1</Primary>
+      <UnderlyingIndexName>PRIMARY</UnderlyingIndexName>
+    </key>
+    <column id="74" parent="13" name="id">
+      <AutoIncrement>28</AutoIncrement>
+      <Comment>主键</Comment>
+      <DasType>bigint(20)|0s</DasType>
+      <NotNull>1</NotNull>
+      <Position>1</Position>
+    </column>
+    <column id="75" parent="13" name="userId">
+      <Comment>调用用户 id</Comment>
+      <DasType>bigint(20)|0s</DasType>
+      <NotNull>1</NotNull>
+      <Position>2</Position>
+    </column>
+    <column id="76" parent="13" name="interfaceInfoId">
+      <Comment>接口 id</Comment>
+      <DasType>bigint(20)|0s</DasType>
+      <NotNull>1</NotNull>
+      <Position>3</Position>
+    </column>
+    <column id="77" parent="13" name="totalNum">
+      <Comment>总调用次数</Comment>
+      <DasType>int(11)|0s</DasType>
+      <DefaultExpression>0</DefaultExpression>
+      <NotNull>1</NotNull>
+      <Position>4</Position>
+    </column>
+    <column id="78" parent="13" name="leftNum">
+      <Comment>剩余调用次数</Comment>
+      <DasType>int(11)|0s</DasType>
+      <DefaultExpression>0</DefaultExpression>
+      <NotNull>1</NotNull>
+      <Position>5</Position>
+    </column>
+    <column id="79" parent="13" name="status">
+      <Comment>0-正常，1-禁用</Comment>
+      <DasType>int(11)|0s</DasType>
+      <DefaultExpression>0</DefaultExpression>
+      <NotNull>1</NotNull>
+      <Position>6</Position>
+    </column>
+    <column id="80" parent="13" name="createTime">
+      <Comment>创建时间</Comment>
+      <DasType>datetime|0s</DasType>
+      <DefaultExpression>CURRENT_TIMESTAMP</DefaultExpression>
+      <NotNull>1</NotNull>
+      <Position>7</Position>
+    </column>
+    <column id="81" parent="13" name="updateTime">
+      <Comment>更新时间</Comment>
+      <DasType>datetime|0s</DasType>
+      <DefaultExpression>CURRENT_TIMESTAMP</DefaultExpression>
+      <NotNull>1</NotNull>
+      <OnUpdate>CURRENT_TIMESTAMP</OnUpdate>
+      <Position>8</Position>
+    </column>
+    <column id="82" parent="13" name="isDelete">
+      <Comment>是否删除(0-未删, 1-已删)</Comment>
+      <DasType>tinyint(4)|0s</DasType>
+      <DefaultExpression>0</DefaultExpression>
+      <NotNull>1</NotNull>
+      <Position>9</Position>
+    </column>
+    <index id="83" parent="13" name="PRIMARY">
+      <ColNames>id</ColNames>
+      <Type>btree</Type>
+      <Unique>1</Unique>
+    </index>
+    <key id="84" parent="13" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <Primary>1</Primary>
+      <UnderlyingIndexName>PRIMARY</UnderlyingIndexName>
+    </key>
+  </database-model>
+</dataSource>

@@ -56,12 +56,6 @@
             <artifactId>amqp-client</artifactId>
             <version>5.17.0</version>
         </dependency>
-        <!--鱼聪明-->
-        <dependency>
-            <groupId>com.yucongming</groupId>
-            <artifactId>yucongming-java-sdk</artifactId>
-            <version>0.0.2</version>
-        </dependency>
         <!--StarApi SDK-->
         <dependency>
             <groupId>star.api</groupId>
@@ -149,23 +143,12 @@
             <artifactId>redisson</artifactId>
             <version>3.23.5</version>
         </dependency>
-<!--        &lt;!&ndash; Spring Session Redis &ndash;&gt;-->
-<!--        <dependency>-->
-<!--            <groupId>org.springframework.session</groupId>-->
-<!--            <artifactId>spring-session-data-redis</artifactId>-->
-<!--        </dependency>-->
         <!-- MySQL -->
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
             <scope>runtime</scope>
         </dependency>
-        <!-- Wx Java Mp -->
-<!--        <dependency>-->
-<!--            <groupId>com.github.binarywang</groupId>-->
-<!--            <artifactId>wx-java-mp-spring-boot-starter</artifactId>-->
-<!--            <version>${wx-java-mp.version}</version>-->
-<!--        </dependency>-->
         <!-- cos_api -->
         <dependency>
             <groupId>com.qcloud</groupId>

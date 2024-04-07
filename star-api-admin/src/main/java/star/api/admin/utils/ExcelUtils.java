@@ -7,8 +7,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
-import star.api.admin.exception.BusinessException;
 import star.api.common.ErrorCode;
+import star.api.exception.BusinessException;
 
 import java.io.IOException;
 import java.util.LinkedHashMap;

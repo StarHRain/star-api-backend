@@ -1,20 +1,10 @@
 package star.api.admin.service.impl;
 
-import cn.hutool.json.JSONUtil;
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONObject;
-import com.google.gson.Gson;
 import org.apache.commons.lang3.StringUtils;
-import org.elasticsearch.core.List;
 import org.redisson.api.RedissonClient;
 import org.springframework.stereotype.Service;
-import star.api.admin.config.BigModelCharConfig;
-import star.api.admin.exception.ThrowUtils;
-import star.api.admin.service.ChartService;
+import star.api.admin.utils.BigModelChar;
 import star.api.admin.utils.BigModelImage;
-import star.api.common.ErrorCode;
-import star.api.model.dto.chart.GenChartByAiRequest;
-import star.api.model.entity.Chart;
 import star.api.model.vo.AiResultVO;
 
 import javax.annotation.Resource;
@@ -32,7 +22,7 @@ public class AiService {
      * @return
      */
     public AiResultVO genChart(long chartId, String question) {
-        BigModelCharConfig bigModelChar = new BigModelCharConfig(chartId,redissonClient);
+        BigModelChar bigModelChar = new BigModelChar(chartId,redissonClient);
         bigModelChar.getResult(question);
         String aReturn = bigModelChar.getReturn();
 

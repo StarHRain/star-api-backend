@@ -1,14 +1,11 @@
 package star.api.admin.controller;
 
-import cn.hutool.core.io.FileUtil;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import star.api.admin.annotation.AuthCheck;
-import star.api.admin.exception.ThrowUtils;
 import star.api.admin.service.ChartService;
-import star.api.admin.utils.ExcelUtils;
 import star.api.common.BaseResponse;
 import star.api.common.DeleteRequest;
 import star.api.common.ResultUtils;
@@ -19,9 +16,6 @@ import star.api.model.vo.AiResultVO;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
-import java.util.Arrays;
-import java.util.List;
-import java.util.concurrent.CompletableFuture;
 
 /**
  * 图表信息

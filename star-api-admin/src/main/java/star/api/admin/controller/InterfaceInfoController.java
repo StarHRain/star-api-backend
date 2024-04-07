@@ -1,6 +1,5 @@
 package star.api.admin.controller;
 
-import cn.hutool.http.HttpRequest;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
@@ -21,7 +20,6 @@ import star.api.model.vo.InterfaceInfoVO;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.io.UnsupportedEncodingException;
-import java.util.List;
 
 /**
  * API信息接口

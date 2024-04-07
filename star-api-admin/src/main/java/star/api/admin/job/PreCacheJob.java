@@ -8,18 +8,16 @@ package star.api.admin.job;
 import lombok.extern.slf4j.Slf4j;
 import org.redisson.api.RLock;
 import org.redisson.api.RedissonClient;
-import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 import star.api.admin.service.InterfaceInfoService;
 import star.api.model.dto.interfaceinfo.InterfaceInfoQueryRequest;
 
 import javax.annotation.Resource;
-
 import java.util.Arrays;
 import java.util.List;
 
-import static star.api.admin.constant.RedisConstant.LOCK_CACHE_PREHEAT;
+import static star.api.constant.RedisConstant.LOCK_CACHE_PREHEAT;
 
 /**
  * 缓存预热
@@ -35,7 +33,6 @@ public class PreCacheJob {
 
     //缓存预热接口页数
     private List<Long> cachePageNum=Arrays.asList(1L,2L);
-
 
 
     //每天执行，预热首页接口列表

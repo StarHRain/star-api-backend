@@ -2,13 +2,13 @@ package star.api.admin.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import org.springframework.stereotype.Service;
-import star.api.admin.exception.ThrowUtils;
 import star.api.admin.mapper.UserInterfaceInfoMapper;
 import star.api.admin.service.InterfaceInfoService;
 import star.api.common.ErrorCode;
 import star.api.model.entity.InterfaceInfo;
 import star.api.model.entity.UserInterfaceInfo;
 import star.api.model.vo.InterfaceInfoVO;
+import star.api.utils.ThrowUtils;
 
 import javax.annotation.Resource;
 import java.util.List;

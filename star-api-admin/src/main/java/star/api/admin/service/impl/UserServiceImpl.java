@@ -10,16 +10,16 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.PageDTO;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
-import org.redisson.api.RedissonClient;
 import org.springframework.beans.BeanUtils;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.util.DigestUtils;
-import star.api.admin.exception.BusinessException;
 import star.api.admin.mapper.UserMapper;
 import star.api.admin.service.UserService;
 import star.api.common.DeleteRequest;
 import star.api.common.ErrorCode;
+import star.api.exception.BusinessException;
+import star.api.exception.ThrowUtils;
 import star.api.model.dto.user.UserAddRequest;
 import star.api.model.dto.user.UserLoginRequest;
 import star.api.model.dto.user.UserQueryRequest;
@@ -36,8 +36,8 @@ import java.util.Map;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
-import static star.api.admin.constant.RedisConstant.LOGIN_TOKEN_KEY;
-import static star.api.admin.constant.RedisConstant.LOGIN_TOKEN_TTL;
+import static star.api.constant.RedisConstant.LOGIN_TOKEN_KEY;
+import static star.api.constant.RedisConstant.LOGIN_TOKEN_TTL;
 import static star.api.constant.UserConstant.USER_LOGIN_STATE;
 
 
@@ -53,6 +53,9 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User>
 
     @Resource
     private UserMapper userMapper;
+
+    @Resource
+    private RedisTemplate redisTemplate;
 
 
     /**
@@ -285,27 +288,9 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User>
             throw new BusinessException(ErrorCode.PARAMS_ERROR, "密码错误");
         }
 
-//        //Redis缓存解决Session共享问题
-//        String headerTokenKey = LOGIN_TOKEN_KEY + request.getHeader("Authorization");
-//        Map<Object, Object> cacheUserMap = redisTemplate.opsForHash().entries(headerTokenKey);
-//        if (!cacheUserMap.isEmpty()) {
-//            User user = BeanUtil.fillBeanWithMap(cacheUserMap, new User(), false);
-//            if (user.getUserAccount().equals(userAccount)&&user.getUserPassword().equals(userPassword)) {
-//                request.getSession().setAttribute(USER_LOGIN_STATE, user);
-//                return this.getUserVO(user);
-//            }
-//        }
-
         // 2. 加密
         String encryptPassword = DigestUtils.md5DigestAsHex((SALT + userPassword).getBytes());
-        //查询是否缓存session
-        User userSession =(User) request.getSession().getAttribute(USER_LOGIN_STATE);
-        if (userSession!=null){
-            //登录账户相同则放回缓存用户
-            if (userAccount.equals(userSession.getUserAccount())&&encryptPassword.equals(userSession.getUserPassword())) {
-                return this.getUserVO(userSession);
-            }
-        }
+
         // 查询用户是否存在
         QueryWrapper<User> queryWrapper = new QueryWrapper<>();
         queryWrapper.eq("userAccount", userAccount);
@@ -317,13 +302,12 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User>
             throw new BusinessException(ErrorCode.PARAMS_ERROR, "用户不存在或密码错误");
         }
 
-//        Map<String, Object> userMap = BeanUtil.beanToMap(user);
-//        String tokenKey = LOGIN_TOKEN_KEY + token;
-//        redisTemplate.opsForHash().putAll(tokenKey, userMap);
-//        redisTemplate.expire(tokenKey, LOGIN_TOKEN_TTL, TimeUnit.MINUTES);
+        // 缓存用户信息
+        Map<String, Object> userMap = BeanUtil.beanToMap(user);
+        String tokenKey = LOGIN_TOKEN_KEY + token;
+        redisTemplate.opsForHash().putAll(tokenKey, userMap);
+        redisTemplate.expire(tokenKey, LOGIN_TOKEN_TTL, TimeUnit.MINUTES);
 
-        // 3. 记录用户的登录态
-        request.getSession().setAttribute(USER_LOGIN_STATE, user);
         return this.getUserVO(user);
     }
 
@@ -335,19 +319,12 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User>
      */
     @Override
     public User getLoginUser(HttpServletRequest request) {
-        // 先判断是否已登录
-        Object userObj = request.getSession().getAttribute(USER_LOGIN_STATE);
-        User currentUser = (User) userObj;
-        if (currentUser == null || currentUser.getId() == null) {
-            throw new BusinessException(ErrorCode.NOT_LOGIN_ERROR);
-        }
-        // 从数据库查询（追求性能的话可以注释，直接走缓存）
-        long userId = currentUser.getId();
-        currentUser = this.getById(userId);
-        if (currentUser == null) {
-            throw new BusinessException(ErrorCode.NOT_LOGIN_ERROR);
-        }
-        return currentUser;
+        String headerTokenKey = LOGIN_TOKEN_KEY + request.getHeader("Authorization");
+        Map<Object, Object> cacheUserMap = redisTemplate.opsForHash().entries(headerTokenKey);
+        //若缓存没有数据则报错
+        ThrowUtils.throwIf(cacheUserMap==null||cacheUserMap.isEmpty(),ErrorCode.FORBIDDEN_ERROR,"未登录");
+        User user = BeanUtil.fillBeanWithMap(cacheUserMap, new User(), false);
+        return user;
     }
 
     /**
@@ -359,8 +336,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User>
     @Override
     public boolean isAdmin(HttpServletRequest request) {
         // 仅管理员可查询
-        Object userObj = request.getSession().getAttribute(USER_LOGIN_STATE);
-        User user = (User) userObj;
+        User user = getLoginUser(request);
         return isAdmin(user);
     }
 
@@ -376,14 +352,11 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User>
      */
     @Override
     public boolean userLogout(HttpServletRequest request) {
-        if (request.getSession().getAttribute(USER_LOGIN_STATE) == null) {
-            throw new BusinessException(ErrorCode.OPERATION_ERROR, "未登录");
-        }
-//        // 移除登录态
-//        String headerTokenKey = LOGIN_TOKEN_KEY + request.getHeader("Authorization");
-//        // 删除 Redis 缓存中的键
-//        redisTemplate.delete(headerTokenKey);
-        request.getSession().removeAttribute(USER_LOGIN_STATE);
+        User loginUser = getLoginUser(request);
+        // 移除登录态
+        String headerTokenKey = LOGIN_TOKEN_KEY + request.getHeader("Authorization");
+        // 删除 Redis 缓存中的键
+        redisTemplate.delete(headerTokenKey);
         return true;
     }
 
@@ -417,6 +390,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User>
         }
         return userList.stream().map(this::getUserVO).collect(Collectors.toList());
     }
+
 
 }
 
