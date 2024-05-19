@@ -12,6 +12,11 @@
     <artifactId>star-api-interfaceInfo</artifactId>
 
     <dependencies>
+        <!-- elasticsearch-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-elasticsearch</artifactId>
+        </dependency>
         <!-- Sentinel -->
         <dependency>
             <groupId>com.alibaba.cloud</groupId>
@@ -123,6 +128,10 @@
         <dependency>
             <groupId>star.api</groupId>
             <artifactId>star-api-common</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-collections4</artifactId>
         </dependency>
     </dependencies>
 

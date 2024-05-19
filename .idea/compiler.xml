@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile default="true" name="Default" enabled="true" />
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="star-api-admin" />
+        <module name="star-api-user" />
+        <module name="star-api-sdk" />
+        <module name="star-api-interfaceInfo" />
+        <module name="star-api-interface" />
+        <module name="star-api-chart" />
+        <module name="star-api-gateway" />
+      </profile>
+    </annotationProcessing>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="star-api-admin" options="-parameters" />
+      <module name="star-api-chart" options="-parameters" />
+      <module name="star-api-gateway" options="-parameters" />
+      <module name="star-api-interface" options="-parameters" />
+      <module name="star-api-interfaceInfo" options="-parameters" />
+      <module name="star-api-sdk" options="-parameters" />
+      <module name="star-api-user" options="-parameters" />
+    </option>
+  </component>
+</project>

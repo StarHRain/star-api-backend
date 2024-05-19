@@ -1,5 +1,8 @@
 use star_api;
 
+create database if not exists star;
+use star;
+
 create table if not exists user
 (
     id           bigint(8) auto_increment comment 'id'
@@ -12,6 +15,7 @@ create table if not exists user
     userAvatar   varchar(1024)                          null comment '用户头像',
     userProfile  varchar(512)                           null comment '用户简介',
     userRole     varchar(256) default 'user'            not null comment '用户角色：user/admin/ban',
+    balance      int          default 0                 not null comment '用户余额',
     accessKey    varchar(512)                           not null comment 'accessKey',
     secretKey    varchar(512)                           not null comment 'secretKey',
     createTime   datetime     default CURRENT_TIMESTAMP not null comment '创建时间',
@@ -19,8 +23,6 @@ create table if not exists user
     isDelete     tinyint      default 0                 not null comment '是否删除'
 ) comment '用户' collate = utf8mb4_unicode_ci;
 
-create index idx_unionId
-    on user (unionId);
 
 CREATE TABLE IF NOT EXISTS interface_info
 (
@@ -29,6 +31,7 @@ CREATE TABLE IF NOT EXISTS interface_info
     description          VARCHAR(256)                       NULL COMMENT '描述',
     url                  VARCHAR(512)                       NOT NULL COMMENT '接口地址',
     host                 VARCHAR(512)                       NULL COMMENT '主机名',
+    price                int      default 10                not null COMMENT '购买1000次调用次数的价格',
     requestParams        TEXT                               NULL COMMENT '请求参数',
     requestParamsRemark  TEXT                               NULL COMMENT '请求参数说明',
     responseParamsRemark TEXT                               NULL COMMENT '响应参数说明',
@@ -81,9 +84,9 @@ create table if not exists chart
 create table if not exists image
 (
     id         bigint auto_increment comment 'id' primary key,
-    goal       text null comment '分析目标',
-    imageType  varchar(512) null comment '图片类型',
-    genResult  text null comment  '生成的分析结论',
+    goal       text                               null comment '分析目标',
+    imageType  varchar(512)                       null comment '图片类型',
+    genResult  text                               null comment '生成的分析结论',
     createTime datetime default CURRENT_TIMESTAMP not null comment '创建时间',
     updateTime datetime default CURRENT_TIMESTAMP not null on update CURRENT_TIMESTAMP comment '更新时间',
     isDelete   tinyint  default 0                 not null comment '是否删除'

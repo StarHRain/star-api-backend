@@ -81,4 +81,15 @@ feign:
   okhttp:
     enabled: true
   sentinel:
-    enabled: true
+    enabled: true'
+# 接口文档配置
+knife4j:
+  enable: true
+  openapi:
+    title: "接口文档"
+    version: 1.0
+    group:
+      default:
+        api-rule: package
+        api-rule-resources:
+          - star.api.user.controller

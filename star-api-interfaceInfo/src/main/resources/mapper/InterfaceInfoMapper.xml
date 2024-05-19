@@ -30,4 +30,10 @@
         userId,createTime,updateTime,
         isDelete
     </sql>
+
+    <select id="listInterfaceInfoWithDelete" resultType="star.api.model.entity.InterfaceInfo">
+        select *
+        from interface_info
+        where updateTime >= #{minUpdateTime}
+    </select>
 </mapper>

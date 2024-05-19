@@ -96,10 +96,17 @@ public class InterfaceInfoController {
         return ResultUtils.success(interfaceInfoService.listInterfaceInfoVOByPage(interfaceInfoPage, request));
     }
 
-//    @PostMapping("/list/page")
-//    public BaseResponse<Page<InterfaceInfo>> listInterfaceInfo(InterfaceInfoQueryRequest interfaceInfoQueryRequest, HttpServletRequest request) {
-//        return ResultUtils.success(interfaceInfoService.listInterfaceInfoByPage(interfaceInfoQueryRequest, request));
-//    }
+    /**
+     * 从 ES 获取接口列表
+     * @param interfaceInfoQueryRequest
+     * @return
+     */
+    @PostMapping("/search/es")
+    public BaseResponse<Page<InterfaceInfoVO>> listInterfaceInfoByES(InterfaceInfoQueryRequest interfaceInfoQueryRequest,HttpServletRequest request) {
+        Page<InterfaceInfo> interfaceInfoPage = interfaceInfoService.listInterfaceInfoByES(interfaceInfoQueryRequest);
+        Page<InterfaceInfoVO> interfaceInfoVOPage = interfaceInfoService.listInterfaceInfoVOByPage(interfaceInfoPage, request);
+        return ResultUtils.success(interfaceInfoVOPage);
+    }
 
     /**
      * 获取当前用户接口列表（分页，VO

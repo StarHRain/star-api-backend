@@ -59,6 +59,12 @@ spring:
     port: 5672
     username: guest
     password: guest
+  # Elasticsearch 配置
+  # todo 需替换配置，然后取消注释
+  elasticsearch:
+    uris: http://localhost:9200
+    username: root
+    password: 123456
 # 个性化配置
 star:
   # 网关 URL

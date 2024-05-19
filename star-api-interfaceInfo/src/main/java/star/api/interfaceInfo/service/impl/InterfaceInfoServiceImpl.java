@@ -1,5 +1,8 @@
 package star.api.interfaceInfo.service.impl;
 
+import java.util.List;
+import java.util.Date;
+
 import cn.hutool.core.lang.TypeReference;
 import cn.hutool.http.HttpResponse;
 import cn.hutool.json.JSONUtil;
@@ -10,19 +13,31 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.dubbo.config.annotation.DubboReference;
+import org.elasticsearch.index.query.BoolQueryBuilder;
+import org.elasticsearch.index.query.QueryBuilder;
+import org.elasticsearch.index.query.QueryBuilders;
+import org.elasticsearch.search.sort.ScoreSortBuilder;
+import org.elasticsearch.search.sort.SortBuilder;
+import org.elasticsearch.search.sort.SortBuilders;
+import org.elasticsearch.search.sort.SortOrder;
 import org.redisson.api.RLock;
 import org.redisson.api.RedissonClient;
 import org.springframework.beans.BeanUtils;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.elasticsearch.core.ElasticsearchRestTemplate;
+import org.springframework.data.elasticsearch.core.SearchHit;
+import org.springframework.data.elasticsearch.core.SearchHits;
+import org.springframework.data.elasticsearch.core.query.NativeSearchQuery;
+import org.springframework.data.elasticsearch.core.query.NativeSearchQueryBuilder;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import star.api.common.DeleteRequest;
-import star.api.common.ErrorCode;
-import star.api.common.IdRequest;
-import star.api.common.RedisData;
+import star.api.common.*;
+import star.api.constant.CommonConstant;
 import star.api.exception.BusinessException;
 import star.api.interfaceInfo.client.InterfaceClient;
 import star.api.interfaceInfo.config.GatewayConfig;
+import star.api.interfaceInfo.es.dto.InterfaceInfoEsDTO;
 import star.api.interfaceInfo.factory.ApiClientFactory;
 import star.api.interfaceInfo.mapper.InterfaceInfoMapper;
 import star.api.interfaceInfo.service.InterfaceInfoService;
@@ -62,8 +77,7 @@ import static star.api.model.enums.InterfaceInfoStatusEnum.ONLINE;
  * @createDate 2023-11-03 14:07:08
  */
 @Service
-public class InterfaceInfoServiceImpl extends ServiceImpl<InterfaceInfoMapper, InterfaceInfo>
-        implements InterfaceInfoService {
+public class InterfaceInfoServiceImpl extends ServiceImpl<InterfaceInfoMapper, InterfaceInfo> implements InterfaceInfoService {
 
     @DubboReference
     private InnerUserService innerUserService;
@@ -86,7 +100,28 @@ public class InterfaceInfoServiceImpl extends ServiceImpl<InterfaceInfoMapper, I
     @Resource
     private InterfaceClient interfaceClient;
 
+    @Resource
+    private ElasticsearchRestTemplate elasticsearchRestTemplate;
+
     private volatile boolean isCacheRebuilding = false;
+
+    /**
+     * 从 ES 中模糊查询数据
+     * @param interfaceInfoQueryRequest
+     * @return
+     */
+    @Override
+    public Page<InterfaceInfo> listInterfaceInfoByES(InterfaceInfoQueryRequest interfaceInfoQueryRequest) {
+        if (interfaceInfoQueryRequest==null){
+            return null;
+        }
+        String searchText = interfaceInfoQueryRequest.getSearchText();
+        if (searchText ==null || searchText.equals("")){
+            return this.listInterfaceInfoByPage(interfaceInfoQueryRequest);
+        }
+        Page<InterfaceInfo> interfaceInfoPage = this.searchFromEs(interfaceInfoQueryRequest);
+        return interfaceInfoPage;
+    }
 
     /**
      * 添加接口
@@ -316,6 +351,65 @@ public class InterfaceInfoServiceImpl extends ServiceImpl<InterfaceInfoMapper, I
 
     }
 
+    @Override
+    public Page<InterfaceInfo> searchFromEs(InterfaceInfoQueryRequest interfaceInfoQueryRequest) {
+        String searchText = interfaceInfoQueryRequest.getSearchText();
+        Long id = interfaceInfoQueryRequest.getId();
+        // es 起始页为 0
+        long current = interfaceInfoQueryRequest.getCurrent() - 1;
+        long pageSize = interfaceInfoQueryRequest.getPageSize();
+        String sortField = interfaceInfoQueryRequest.getSortField();
+        String sortOrder = interfaceInfoQueryRequest.getSortOrder();
+        BoolQueryBuilder boolQueryBuilder = QueryBuilders.boolQuery();
+        // 过滤
+        boolQueryBuilder.filter(QueryBuilders.termQuery("isDelete", 0));
+        if (id != null) {
+            boolQueryBuilder.filter(QueryBuilders.termQuery("id", id));
+        }
+        // 按关键词搜索
+        if (StringUtils.isNotBlank(searchText)) {
+            boolQueryBuilder.should(QueryBuilders.matchQuery("name", searchText));
+            boolQueryBuilder.should(QueryBuilders.matchQuery("description", searchText));
+        }
+        // 排序
+        SortBuilder<?> sortBuilder = SortBuilders.scoreSort();
+        if (StringUtils.isNotBlank(sortField)) {
+            sortBuilder = SortBuilders.fieldSort(sortField);
+            sortBuilder.order(SORT_ORDER_ASC.equals(sortOrder) ? SortOrder.ASC : SortOrder.DESC);
+        }
+        // 分页
+        PageRequest pageRequest = PageRequest.of((int) current, (int) pageSize);
+        // 构造查询
+        NativeSearchQuery searchQuery = new NativeSearchQueryBuilder().withQuery(boolQueryBuilder).withPageable(pageRequest).withSorts(sortBuilder).build();
+        SearchHits<InterfaceInfoEsDTO> searchHits = elasticsearchRestTemplate.search(searchQuery, InterfaceInfoEsDTO.class);
+
+        ArrayList<InterfaceInfo> resourceList = new ArrayList<>();
+        // 查出结果后，从 db 获取最新动态数据 (比如调用次数
+        if (searchHits.hasSearchHits()) {
+            List<SearchHit<InterfaceInfoEsDTO>> searchHitList = searchHits.getSearchHits();
+            List<Long> interfaceInfoIdList = searchHitList.stream()
+                    .map(searchHit -> searchHit.getContent().getId())
+                    .collect(Collectors.toList());
+            List<InterfaceInfo> interfaceInfoList = baseMapper.selectBatchIds(interfaceInfoIdList);
+            if(interfaceInfoList !=null){
+                Map<Long, List<InterfaceInfo>> idInterfaceMap = interfaceInfoList.stream()
+                        .collect(Collectors.groupingBy(InterfaceInfo::getId));
+                interfaceInfoIdList.forEach(interfaceInfoId ->{
+                    if (idInterfaceMap.containsKey(interfaceInfoId)){
+                        resourceList.add(idInterfaceMap.get(interfaceInfoId).get(0));
+                    }else {
+                        //从 es 清空 db 已经物理删除的数据
+                        elasticsearchRestTemplate.delete(String.valueOf(interfaceInfoId),InterfaceInfoEsDTO.class);
+                    }
+                });
+            }
+        }
+        Page<InterfaceInfo> page = new Page<>();
+        page.setTotal(searchHits.getSearchHits().size());
+        page.setRecords(resourceList);
+        return page;
+    }
+
     @Transactional
     public Page<InterfaceInfo> cacheInterfaceInfo(InterfaceInfoQueryRequest interfaceInfoQueryRequest, Long expireSeconds) {
         //查询数据
@@ -332,7 +426,7 @@ public class InterfaceInfoServiceImpl extends ServiceImpl<InterfaceInfoMapper, I
             throw new RuntimeException(e);
         }
         //如果数据库无该数据 缓存空值 防止缓存穿透
-        RedisData<Page<InterfaceInfo>> redisData=null;
+        RedisData<Page<InterfaceInfo>> redisData = null;
         if (interfaceInfoPage == null) {
             //数据库没有数据缓存空值
             redisData = new RedisData<>(null, LocalDateTime.now().plusSeconds(1L));
@@ -363,46 +457,39 @@ public class InterfaceInfoServiceImpl extends ServiceImpl<InterfaceInfoMapper, I
         }
 
         //1.关联查询用户信息
-        Set<Long> userIdSet = interfaceInfoList.stream()
-                .map(InterfaceInfo::getUserId)
-                .collect(Collectors.toSet());
+        Set<Long> userIdSet = interfaceInfoList.stream().map(InterfaceInfo::getUserId).collect(Collectors.toSet());
         Map<Long, List<User>> userIdUserListMap = innerUserService.getIdUserMapByIds(userIdSet);
 
         //获取当前登录用户
         String token = request.getHeader("Authorization");
         User loginUser = innerUserService.getLoginUser(token);
         //填充信息
-        List<InterfaceInfoVO> interfaceInfoVOList = interfaceInfoList.stream()
-                .map(interfaceInfo -> {
-                    InterfaceInfoVO interfaceInfoVO = InterfaceInfoVO.objToVo(interfaceInfo);
-                    //判断该接口是否属于该用户
-                    UserInterfaceInfo userInterfaceInfo = userInterfaceInfoService.lambdaQuery()
-                            .eq(UserInterfaceInfo::getUserId, loginUser.getId())
-                            .eq(UserInterfaceInfo::getInterfaceInfoId, interfaceInfo.getId())
-                            .one();
-                    //填充调用总数，剩余次数，接口是否为当前用户拥有
-                    if (userInterfaceInfo != null) {
-                        interfaceInfoVO.setIsOwnerByCurrentUser(true);
-                        interfaceInfoVO.setTotalNum(userInterfaceInfo.getTotalNum());
-                        interfaceInfoVO.setLeftNum(userInterfaceInfo.getLeftNum());
-                    } else {
-                        interfaceInfoVO.setIsOwnerByCurrentUser(false);
-                    }
+        List<InterfaceInfoVO> interfaceInfoVOList = interfaceInfoList.stream().map(interfaceInfo -> {
+            InterfaceInfoVO interfaceInfoVO = InterfaceInfoVO.objToVo(interfaceInfo);
+            //判断该接口是否属于该用户
+            UserInterfaceInfo userInterfaceInfo = userInterfaceInfoService.lambdaQuery().eq(UserInterfaceInfo::getUserId, loginUser.getId()).eq(UserInterfaceInfo::getInterfaceInfoId, interfaceInfo.getId()).one();
+            //填充调用总数，剩余次数，接口是否为当前用户拥有
+            if (userInterfaceInfo != null) {
+                interfaceInfoVO.setIsOwnerByCurrentUser(true);
+                interfaceInfoVO.setTotalNum(userInterfaceInfo.getTotalNum());
+                interfaceInfoVO.setLeftNum(userInterfaceInfo.getLeftNum());
+            } else {
+                interfaceInfoVO.setIsOwnerByCurrentUser(false);
+            }
 
-                    Long userId = interfaceInfo.getId();
-                    //填充接口创建用户
-                    User user = userIdUserListMap.getOrDefault(userId, Collections.emptyList())
-                            .stream().findFirst().orElse(null);
-                    interfaceInfoVO.setUser(innerUserService.getUserVO(user));
+            Long userId = interfaceInfo.getId();
+            //填充接口创建用户
+            User user = userIdUserListMap.getOrDefault(userId, Collections.emptyList()).stream().findFirst().orElse(null);
+            interfaceInfoVO.setUser(innerUserService.getUserVO(user));
 
-                    //填充请求参数说明和响应参数说明
-                    List<RequestParamsRemarkVO> requestParamsRemarkVOList = JSONUtil.toList(JSONUtil.parseArray(interfaceInfo.getRequestParamsRemark()), RequestParamsRemarkVO.class);
-                    List<ResponseParamsRemarkVO> responseParamsRemarkVOList = JSONUtil.toList(JSONUtil.parseArray(interfaceInfo.getResponseParamsRemark()), ResponseParamsRemarkVO.class);
-                    interfaceInfoVO.setRequestParamsRemark(requestParamsRemarkVOList);
-                    interfaceInfoVO.setResponseParamsRemark(responseParamsRemarkVOList);
+            //填充请求参数说明和响应参数说明
+            List<RequestParamsRemarkVO> requestParamsRemarkVOList = JSONUtil.toList(JSONUtil.parseArray(interfaceInfo.getRequestParamsRemark()), RequestParamsRemarkVO.class);
+            List<ResponseParamsRemarkVO> responseParamsRemarkVOList = JSONUtil.toList(JSONUtil.parseArray(interfaceInfo.getResponseParamsRemark()), ResponseParamsRemarkVO.class);
+            interfaceInfoVO.setRequestParamsRemark(requestParamsRemarkVOList);
+            interfaceInfoVO.setResponseParamsRemark(responseParamsRemarkVOList);
 
-                    return interfaceInfoVO;
-                }).collect(Collectors.toList());
+            return interfaceInfoVO;
+        }).collect(Collectors.toList());
 
         interfaceInfoVOPage.setRecords(interfaceInfoVOList);
         return interfaceInfoVOPage;
@@ -523,8 +610,7 @@ public class InterfaceInfoServiceImpl extends ServiceImpl<InterfaceInfoMapper, I
         interfaceInfoQueryWrapper.eq(ObjectUtils.isNotEmpty(status), "status", status);
         interfaceInfoQueryWrapper.eq("isDelete", false);
         interfaceInfoQueryWrapper.gt(ObjectUtils.isNotEmpty(createTime), "createTime", createTime);
-        interfaceInfoQueryWrapper.orderBy(SqlUtils.validSortField(sortField), sortOrder.equals(SORT_ORDER_ASC)
-                , sortField);
+        interfaceInfoQueryWrapper.orderBy(SqlUtils.validSortField(sortField), sortOrder.equals(SORT_ORDER_ASC), sortField);
         return interfaceInfoQueryWrapper;
     }
 

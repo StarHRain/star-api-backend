@@ -21,6 +21,13 @@ import java.util.List;
  * @createDate 2023-11-03 14:07:08
  */
 public interface InterfaceInfoService extends IService<InterfaceInfo> {
+
+    /**
+     * 从 ES 模糊查询数据
+     * @param interfaceInfoQueryRequest
+     * @return
+     */
+    Page<InterfaceInfo> listInterfaceInfoByES(InterfaceInfoQueryRequest interfaceInfoQueryRequest);
     /**
      * 添加接口服务
      *
@@ -80,6 +87,13 @@ public interface InterfaceInfoService extends IService<InterfaceInfo> {
     Page<InterfaceInfo> listInterfaceInfoByPage(InterfaceInfoQueryRequest interfaceInfoQueryRequest);
 
     /**
+     * 从 ES 查询
+     * @param interfaceInfoQueryRequest
+     * @return
+     */
+    Page<InterfaceInfo> searchFromEs(InterfaceInfoQueryRequest interfaceInfoQueryRequest);
+
+    /**
      * 获取接口（分页，VO
      * @param interfaceInfoPage
      * @param request
@@ -109,6 +123,8 @@ public interface InterfaceInfoService extends IService<InterfaceInfo> {
      * @return
      */
     Object invokeInterfaceInfo(InterfaceInfoInvokeRequest interfaceInfoInvokeRequest, HttpServletRequest request);
+
+
 
     /**
      * 接口校验服务
