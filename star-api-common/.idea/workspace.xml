@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="c7bcfbc2-86ed-4836-a138-7975a3eb8e37" name="变更" comment="">
+      <change afterPath="$PROJECT_DIR$/../.idea/compiler.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../.idea/jarRepositories.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../star-api-chart/src/test/java/star/api/chart/mq/SpringAmqpTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../star-api-interfaceInfo/src/main/java/star/api/interfaceInfo/es/dao/InterfaceInfoEsDao.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../star-api-interfaceInfo/src/main/java/star/api/interfaceInfo/es/dto/InterfaceInfoEsDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../star-api-interfaceInfo/src/main/java/star/api/interfaceInfo/job/IncSyncInterfaceInfoToEs.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../star-api-interfaceInfo/src/main/java/star/api/interfaceInfo/job/once/FullSyncInterfaceInfoToEs.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../star-api-interfaceInfo/src/main/test/java/star/api/interfaceInfo/MainApplicationTests.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../star-api-interfaceInfo/src/main/test/java/star/api/interfaceInfo/es/InterfaceInfoEsDaoTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../star-api-user/src/main/java/star/api/user/UserApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/dataSources/84b3e69b-1dc8-4345-8a23-b36e592ff4f9.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/dataSources/84b3e69b-1dc8-4345-8a23-b36e592ff4f9.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/dataSources/c17ce3ae-1383-4d1b-b8a7-f5108f67311d.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/dataSources/c17ce3ae-1383-4d1b-b8a7-f5108f67311d.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../star-api-chart/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../star-api-chart/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../star-api-interfaceInfo/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../star-api-interfaceInfo/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../star-api-interfaceInfo/src/main/java/star/api/interfaceInfo/controller/InterfaceInfoController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../star-api-interfaceInfo/src/main/java/star/api/interfaceInfo/controller/InterfaceInfoController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../star-api-interfaceInfo/src/main/java/star/api/interfaceInfo/mapper/InterfaceInfoMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/../star-api-interfaceInfo/src/main/java/star/api/interfaceInfo/mapper/InterfaceInfoMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../star-api-interfaceInfo/src/main/java/star/api/interfaceInfo/service/InterfaceInfoService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../star-api-interfaceInfo/src/main/java/star/api/interfaceInfo/service/InterfaceInfoService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../star-api-interfaceInfo/src/main/java/star/api/interfaceInfo/service/impl/InterfaceInfoServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/../star-api-interfaceInfo/src/main/java/star/api/interfaceInfo/service/impl/InterfaceInfoServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../star-api-interfaceInfo/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/../star-api-interfaceInfo/src/main/resources/application.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../star-api-interfaceInfo/src/main/resources/mapper/InterfaceInfoMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../star-api-interfaceInfo/src/main/resources/mapper/InterfaceInfoMapper.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../star-api-sdk/src/main/java/star/api/sdk/utils/SignUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/../star-api-sdk/src/main/java/star/api/sdk/utils/SignUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../star-api-user/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../star-api-user/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../star-api-user/src/main/java/star/api/user/config/Knife4jConfig.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../star-api-user/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/../star-api-user/src/main/resources/application.yml" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="mavenHome" value="$PROJECT_DIR$/../../../../apache-maven-3.6.3" />
+        <option name="useMavenConfig" value="true" />
+        <option name="userSettingsFile" value="D:\Java\apache-maven-3.6.3\conf\settings.xml" />
+      </MavenGeneralSettings>
+    </option>
+  </component>
+  <component name="ProjectId" id="2f32YEkVgZdF4M5ahqacboWhS2d" />
+  <component name="ProjectViewState">
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "last_opened_file_path": "D:/Java/_星球项目/Api/star-api-backend/star-api-common",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "settings.editor.selected.configurable": "MavenSettings",
+    "spring.configuration.checksum": "0b525cf128f7b028f12d4033ad03529d",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="star.api.model.dto.interfaceinfo.es" />
+      <recent name="star.api.model.dto.interfaceinfo" />
+    </key>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="应用程序级" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="默认任务">
+      <changelist id="c7bcfbc2-86ed-4836-a138-7975a3eb8e37" name="变更" comment="" />
+      <created>1713015489194</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1713015489194</updated>
+      <workItem from="1713015490292" duration="168000" />
+      <workItem from="1713021522848" duration="1054000" />
+      <workItem from="1713066022577" duration="2308000" />
+      <workItem from="1713148982259" duration="1136000" />
+      <workItem from="1713864287145" duration="1269000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+</project>

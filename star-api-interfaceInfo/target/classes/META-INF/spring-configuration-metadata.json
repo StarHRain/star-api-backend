@@ -1,0 +1,37 @@
+{
+  "groups": [
+    {
+      "name": "spring.redis",
+      "type": "star.api.interfaceInfo.config.RedissonConfig",
+      "sourceType": "star.api.interfaceInfo.config.RedissonConfig"
+    },
+    {
+      "name": "star.gateway",
+      "type": "star.api.interfaceInfo.config.GatewayConfig",
+      "sourceType": "star.api.interfaceInfo.config.GatewayConfig"
+    }
+  ],
+  "properties": [
+    {
+      "name": "spring.redis.host",
+      "type": "java.lang.String",
+      "sourceType": "star.api.interfaceInfo.config.RedissonConfig"
+    },
+    {
+      "name": "spring.redis.password",
+      "type": "java.lang.String",
+      "sourceType": "star.api.interfaceInfo.config.RedissonConfig"
+    },
+    {
+      "name": "spring.redis.port",
+      "type": "java.lang.String",
+      "sourceType": "star.api.interfaceInfo.config.RedissonConfig"
+    },
+    {
+      "name": "star.gateway.host",
+      "type": "java.lang.String",
+      "sourceType": "star.api.interfaceInfo.config.GatewayConfig"
+    }
+  ],
+  "hints": []
+}

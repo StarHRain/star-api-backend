@@ -1,0 +1,65 @@
+spring:
+  #默认 dev 环境
+  profiles:
+    active: dev
+  cloud:
+    # 服务名
+    application:
+      name: gateway-service
+    # Spring Cloud
+    cloud:
+#      # Sentinel
+#      sentinel:
+#        transport:
+#          dashboard: localhost:8088
+      # Nacos
+      nacos:
+        server-addr: localhost:8848
+    # 网关路由
+    gateway:
+      routes:
+        # interface-service
+        - id: interface-service
+          uri: lb://interface-service
+          predicates:
+            - Header=server,interface
+          filters:
+            - Sign
+        # user-service
+        - id: user-service
+          uri: lb://user-service
+          predicates:
+            - Path=/api/user/**
+        # interfaceInfo-service
+        - id: interfaceInfo-service
+          uri: lb://interfaceInfo-service
+          predicates:
+            - Path=/api/interfaceInfo/**,/api/userInterfaceInfo/**,/api/analysis/**
+        # chart-service
+        - id: chart-service
+          uri: lb://chart-service
+          predicates:
+            - Path=/api/chart/**,/api/image/**
+  redis:
+    host: localhost
+    port: 6379
+    database: 0
+# 端口号
+server:
+  port: 8090
+# 放行页面
+api:
+  auth:
+    excludePaths:
+      - /api/user/login
+      - /api/user/register
+# Dubbo 配置
+dubbo:
+  application:
+    name: gateway-consumer
+  protocol:
+    name: dubbo
+    port: -1
+  registry:
+    id: nacos-registry
+    address: nacos://localhost:8848

@@ -1,0 +1,9 @@
+server:
+  port: 8123
+spring:
+  application:
+    name: interface-service
+  # Spring Cloud
+  cloud:
+    nacos:
+      server-addr: localhost:8848

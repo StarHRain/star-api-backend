@@ -1,0 +1,28 @@
+server:
+  port: 8090
+
+spring:
+  # 网关 配置
+  cloud:
+    gateway:
+      routes:
+        - id: api_route
+          uri: http://8.136.99.4:8123
+          predicates:
+            - Path=/api/**
+  # Redis 配置
+  redis:
+    host: 8.136.99.4
+    port: 6379
+    password: Hy123456
+    database: 0
+# Dubbo 配置
+dubbo:
+  application:
+    name: star-api-admin-consumer
+  protocol:
+    name: dubbo
+    port: -1
+  registry:
+    id: nacos-registry
+    address: nacos://8.136.99.4:8848
